@@ -3,7 +3,7 @@
     <RouterLink to="/login">登陆页</RouterLink>
     <RouterLink to="/main">首页</RouterLink>
     <RouterView />
-    <ElButton>主要按钮</ElButton>
+    <el-button type="primary">主要按钮</el-button>
   </div>
 </template>
 
