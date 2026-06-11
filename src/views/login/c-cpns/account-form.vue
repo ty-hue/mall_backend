@@ -28,14 +28,16 @@ import { ElMessage } from 'element-plus'
 import { useUserInfoStore } from '@/stores/userinfo'
 import type { IAccount } from '@/types'
 import router from '@/router'
+import localCache from '@/utils/cache'
+import { PASSWORD_KEY, USERNAME_KEY } from '@/global/constant'
 const userInfoStore = useUserInfoStore()
 
 const { loginAction } = userInfoStore
 
 const accountFormRef = ref<InstanceType<typeof ElForm>>()
 const accountFormData = reactive<IAccount>({
-  username: '',
-  password: '',
+  username: localCache.get<string>(USERNAME_KEY) || '',
+  password: localCache.get<string>(PASSWORD_KEY) || '',
 })
 const accountFormRules: FormRules = {
   username: [
@@ -51,12 +53,20 @@ const accountFormRules: FormRules = {
     },
   ],
 }
-const handleLoginAction = async () => {
+const handleLoginAction = async (isRememberPassword: boolean) => {
+  console.log(isRememberPassword)
   await accountFormRef.value?.validate(async (valid) => {
     if (valid) {
       try {
         await loginAction(accountFormData)
         ElMessage.success('登录成功')
+        if (isRememberPassword) {
+          localCache.set(USERNAME_KEY, accountFormData.username)
+          localCache.set(PASSWORD_KEY, accountFormData.password)
+        } else {
+          localCache.remove(USERNAME_KEY)
+          localCache.remove(PASSWORD_KEY)
+        }
         router.push({ name: 'Main', replace: true })
       } catch (error) {
         console.log(error)

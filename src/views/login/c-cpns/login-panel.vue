@@ -24,25 +24,30 @@
       </el-tabs>
     </div>
     <div class="remember-and-forget">
-      <el-checkbox v-model="isChecked" label="记住密码" size="large" />
+      <el-checkbox v-model="isRememberPassword" label="记住密码" size="large" />
       <el-link href="https://element-plus.org" target="_blank">忘记密码</el-link>
     </div>
     <el-button class="login-btn" type="primary" @click="handleLogin">立即登录</el-button>
   </div>
 </template>
 <script setup lang="ts">
+import localCache from '@/utils/cache.ts'
 import AccountForm from './account-form.vue'
 import PhoneForm from './phone-form.vue'
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
+import { IS_REMEMBER_PASSWORD_KEY } from '@/global/constant.ts'
 
 const activeTab = ref('account')
-const isChecked = ref(false)
+const isRememberPassword = ref<boolean>(localCache.get<boolean>(IS_REMEMBER_PASSWORD_KEY) || false)
 const accountFormRef = ref<InstanceType<typeof AccountForm>>()
 const phoneFormRef = ref<InstanceType<typeof PhoneForm>>()
+watch(isRememberPassword, (newVal) => {
+  localCache.set(IS_REMEMBER_PASSWORD_KEY, newVal)
+})
 const handleLogin = async () => {
   console.log(activeTab.value)
   if (activeTab.value === 'account') {
-    await accountFormRef.value?.handleLoginAction()
+    await accountFormRef.value?.handleLoginAction(isRememberPassword.value)
   } else if (activeTab.value === 'phone') {
   }
 }
