@@ -35,4 +35,25 @@ export default [
       return resFail('用户不存在')
     },
   },
+  //获取验证码 实际上什么都没有做，返回null，只是模拟一下有这个接口
+  {
+    method: 'get',
+    url: '/api/getVerifyCode/:phone',
+    response: () => {
+      return resSuccess(null)
+    },
+  },
+  // 手机号 + 验证码 登陆接口
+  {
+    method: 'post',
+    url: '/api/loginByPhone',
+    response: ({ body }) => {
+      const { phone, code } = body
+      const user = users.find((item) => item.phone === phone && item.code === code)
+      if (user) {
+        return resSuccess({ id: user.id, name: user.name, token: user.token })
+      }
+      return resFail('手机号或验证码错误')
+    },
+  },
 ]

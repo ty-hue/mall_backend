@@ -1,5 +1,5 @@
-import { getUserInfoById, login } from '@/service/apis/login'
-import type { IAccount, IUserInfo } from '@/types'
+import { getUserInfoById, login, loginByPhone } from '@/service/apis/login'
+import type { IAccount, IAccountByPhone, IUserInfo } from '@/types'
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import { useTokenStore } from './token'
@@ -21,10 +21,19 @@ export const useUserInfoStore = defineStore(
       await useTokenStore().removeToken()
       userInfo.value = {} as IUserInfo
     }
+    // 手机号 + 验证码 登陆操作
+    const loginByPhoneAction = async (account: IAccountByPhone) => {
+      const res = await loginByPhone(account)
+      await useTokenStore().setToken(res.token)
+      // 登录成功后，获取用户信息
+      const userInfoRes = await getUserInfoById(res.id)
+      userInfo.value = userInfoRes
+    }
     return {
       userInfo,
       loginAction,
       loginoutAction,
+      loginByPhoneAction,
     }
   },
   {

@@ -37,3 +37,8 @@ export interface Department {
   createAt: string
   updateAt: string
 }
+
+export interface IAccountByPhone {
+  phone: string
+  code: string
+}

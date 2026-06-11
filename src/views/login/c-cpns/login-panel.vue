@@ -23,7 +23,7 @@
         </el-tab-pane>
       </el-tabs>
     </div>
-    <div class="remember-and-forget">
+    <div class="remember-and-forget" v-show="activeTab === 'account'">
       <el-checkbox v-model="isRememberPassword" label="记住密码" size="large" />
       <el-link href="https://element-plus.org" target="_blank">忘记密码</el-link>
     </div>
@@ -49,6 +49,7 @@ const handleLogin = async () => {
   if (activeTab.value === 'account') {
     await accountFormRef.value?.handleLoginAction(isRememberPassword.value)
   } else if (activeTab.value === 'phone') {
+    await phoneFormRef.value?.handleLoginAction()
   }
 }
 </script>
