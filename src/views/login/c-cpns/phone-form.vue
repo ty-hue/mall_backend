@@ -24,7 +24,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, reactive, ref } from 'vue'
+import { computed, onUnmounted, reactive, ref } from 'vue'
 import { useUserInfoStore } from '@/stores/userinfo'
 import type { IAccountByPhone } from '@/types'
 import { ElMessage, type ElForm } from 'element-plus'
@@ -58,6 +58,7 @@ const isAllowGetVerifyCode = computed(() => {
   }
 })
 const countdown = ref<number>(60)
+let timer: number | undefined = undefined
 const rules = reactive({
   phone: [
     { required: true, message: '请输入手机号', trigger: 'blur' },
@@ -74,10 +75,11 @@ const handleGetVerifyCodeAction = async () => {
     await getVerifyCode(phoneForm.phone)
     ElMessage.success('验证码发送成功')
     verifyCodeStatus.value = VerifyCodeStatus.Expired
-    const timer = setInterval(() => {
+    timer = setInterval(() => {
       countdown.value--
       if (countdown.value <= 0) {
         clearInterval(timer)
+        timer = undefined
         verifyCodeStatus.value = VerifyCodeStatus.Reset
         countdown.value = 60
       }
@@ -102,6 +104,13 @@ const handleLoginAction = async () => {
     }
   })
 }
+// 清理定时器
+onUnmounted(() => {
+  if (timer) {
+    clearInterval(timer)
+    timer = undefined
+  }
+})
 defineExpose({
   handleLoginAction,
 })
