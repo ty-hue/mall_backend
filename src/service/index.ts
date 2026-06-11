@@ -5,8 +5,10 @@ import type { LoadingInstance } from 'element-plus'
 import type { ApiResponse, CustomRequestConfig } from './types'
 import { BASE_URL, TIME_OUT, SUCCESS_CODE, WHITE_LIST } from './config'
 import { useRouter } from 'vue-router'
-import { STORAGE_KEY } from '@/utils/storage'
-import storage from '@/utils/storage'
+import { useTokenStore } from '@/stores/token'
+import { storeToRefs } from 'pinia'
+const tokenStore = useTokenStore()
+const { token } = storeToRefs(tokenStore)
 let loadingInstance: LoadingInstance | null = null
 const router = useRouter()
 const pendingMap = new Map<string, AbortController>()
@@ -57,9 +59,8 @@ service.interceptors.request.use(
       })
     }
 
-    const token = storage.get<string>(STORAGE_KEY.TOKEN)
-    if (token && !WHITE_LIST.includes(config.url || '')) {
-      config.headers.Authorization = `Bearer ${token}`
+    if (token.value && !WHITE_LIST.includes(config.url || '')) {
+      config.headers.authorization = `Bearer ${token.value}`
     }
 
     return config
@@ -86,7 +87,7 @@ service.interceptors.response.use(
     ElMessage.error(message || '请求失败')
     return Promise.reject(res)
   },
-  (error) => {
+  async (error) => {
     loadingInstance?.close()
     loadingInstance = null
     pendingMap.clear()
@@ -101,7 +102,7 @@ service.interceptors.response.use(
     }
 
     if (status === 401) {
-      storage.remove(STORAGE_KEY.TOKEN)
+      tokenStore.removeToken()
       router.push({ name: 'Login' })
     }
 
@@ -112,35 +113,19 @@ service.interceptors.response.use(
 
 // 请求封装（已修复）
 const request = {
-  get<T = unknown>(
-    url: string,
-    params?: unknown,
-    config?: CustomRequestConfig,
-  ): Promise<ApiResponse<T>> {
+  get<T = unknown>(url: string, params?: unknown, config?: CustomRequestConfig): Promise<T> {
     return service.get(url, { params, ...config }).then((res) => res.data)
   },
 
-  post<T = unknown>(
-    url: string,
-    data?: unknown,
-    config?: CustomRequestConfig,
-  ): Promise<ApiResponse<T>> {
+  post<T = unknown>(url: string, data?: unknown, config?: CustomRequestConfig): Promise<T> {
     return service.post(url, data, config).then((res) => res.data)
   },
 
-  put<T = unknown>(
-    url: string,
-    data?: unknown,
-    config?: CustomRequestConfig,
-  ): Promise<ApiResponse<T>> {
+  put<T = unknown>(url: string, data?: unknown, config?: CustomRequestConfig): Promise<T> {
     return service.put(url, data, config).then((res) => res.data)
   },
 
-  delete<T = unknown>(
-    url: string,
-    params?: unknown,
-    config?: CustomRequestConfig,
-  ): Promise<ApiResponse<T>> {
+  delete<T = unknown>(url: string, params?: unknown, config?: CustomRequestConfig): Promise<T> {
     return service.delete(url, { params, ...config }).then((res) => res.data)
   },
 }

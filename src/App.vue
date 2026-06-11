@@ -1,14 +1,15 @@
 <template>
-  <div>
-    <RouterLink to="/login">登陆页</RouterLink>
-    <RouterLink to="/main">首页</RouterLink>
-    <RouterView />
-    <el-button type="primary">主要按钮</el-button>
+  <div class="app">
+    <router-view />
   </div>
 </template>
 
-<script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
-</script>
+<script setup lang="ts"></script>
 
-<style scoped></style>
+<style lang="less" scoped>
+.app {
+  width: 100vw;
+  height: 100vh;
+  background-color: #f5f5f5;
+}
+</style>
