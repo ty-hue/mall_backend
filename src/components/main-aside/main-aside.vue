@@ -7,7 +7,7 @@
     <div class="menu">
       <el-menu
         router
-        default-active="2"
+        default-active="/main/analysis/overview"
         class="el-menu-vertical-demo"
         active-text-color="#fff"
         text-color="#b7bdc3"
