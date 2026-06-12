@@ -1,9 +1,4 @@
-export default [
-  {
-    method: 'post',
-    url: '/api/users',
-    response: () => {
-      return []
-    },
-  },
-]
+import menu from './menu.js'
+import login from './login.js'
+
+export default [...menu, ...login]

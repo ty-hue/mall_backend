@@ -4,6 +4,7 @@ import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import { useTokenStore } from './token'
 import { USERINFO_KEY } from '@/global/constant'
+import { useMenuStore } from './menu'
 export const useUserInfoStore = defineStore(
   'userinfo',
   () => {
@@ -15,6 +16,8 @@ export const useUserInfoStore = defineStore(
       // 登录成功后，获取用户信息
       const userInfoRes = await getUserInfoById(res.id)
       userInfo.value = userInfoRes
+      // 登录成功后，获取菜单
+      await useMenuStore().getMenuList(userInfoRes.role.id)
     }
     // 退出登录操作
     const loginoutAction = async () => {
@@ -28,6 +31,8 @@ export const useUserInfoStore = defineStore(
       // 登录成功后，获取用户信息
       const userInfoRes = await getUserInfoById(res.id)
       userInfo.value = userInfoRes
+      // 登录成功后，获取菜单
+      await useMenuStore().getMenuList(userInfoRes.role.id)
     }
     return {
       userInfo,

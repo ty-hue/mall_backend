@@ -42,3 +42,14 @@ export interface IAccountByPhone {
   phone: string
   code: string
 }
+
+export interface MenuItem {
+  id: number
+  name: string
+  url: string | null
+  icon: string | null
+  permissionId: number | null
+  parentId: number | null
+  // 递归子菜单
+  children: MenuItem[]
+}

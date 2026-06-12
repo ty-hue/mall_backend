@@ -1,4 +1,4 @@
-import type { IAccount, IAccountByPhone, ILoginResponse, IUserInfo } from '@/types'
+import type { IAccount, IAccountByPhone, ILoginResponse, IUserInfo, MenuItem } from '@/types'
 import request from '@/service'
 // 登陆接口
 export async function login(account: IAccount) {
@@ -15,4 +15,9 @@ export async function getVerifyCode(phone: string) {
 // 手机号 + 验证码 登陆接口
 export async function loginByPhone(account: IAccountByPhone) {
   return request.post<ILoginResponse>('/api/loginByPhone', account)
+}
+
+// 根据角色ID获取菜单接口
+export async function getMenuByRoleId(roleId: number) {
+  return request.get<MenuItem[]>(`/api/menu/${roleId}`)
 }

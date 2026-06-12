@@ -1,0 +1,234 @@
+[
+  {
+    "id": 1,
+    "name": "系统总览",
+    "url": "/main/analysis",
+    "icon": "el-icon-monitor",
+    "permissionId": null,
+    "parentId": null
+  },
+  {
+    "id": 2,
+    "name": "核心技术",
+    "url": "/main/analysis/overview",
+    "icon": "el-icon-user",
+    "permissionId": null,
+    "parentId": 1
+  },
+  {
+    "id": 3,
+    "name": "商品统计",
+    "url": "/main/analysis/dashboard",
+    "icon": "el-icon-user",
+    "permissionId": null,
+    "parentId": 1
+  },
+  {
+    "id": 4,
+    "name": "系统管理",
+    "url": "/main/system",
+    "icon": "el-icon-setting",
+    "permissionId": 26,
+    "parentId": null
+  },
+  {
+    "id": 5,
+    "name": "用户管理",
+    "url": "/main/system/user",
+    "icon": "el-icon-user",
+    "permissionId": 23,
+    "parentId": 4
+  },
+  {
+    "id": 6,
+    "name": "创建用户",
+    "url": null,
+    "icon": "el-icon-user",
+    "permissionId": 10,
+    "parentId": 5
+  },
+  {
+    "id": 7,
+    "name": "删除用户",
+    "url": null,
+    "icon": "el-icon-user",
+    "permissionId": 12,
+    "parentId": 5
+  },
+  {
+    "id": 8,
+    "name": "查询用户",
+    "url": null,
+    "icon": "el-icon-user",
+    "permissionId": 9,
+    "parentId": 5
+  },
+  {
+    "id": 9,
+    "name": "修改用户",
+    "url": null,
+    "icon": "el-icon-user",
+    "permissionId": 11,
+    "parentId": 5
+  },
+  {
+    "id": 10,
+    "name": "部门管理",
+    "url": "/main/system/department",
+    "icon": "el-icon-setting",
+    "permissionId": 21,
+    "parentId": 4
+  },
+  {
+    "id": 11,
+    "name": "创建部门",
+    "url": null,
+    "icon": "el-icon-setting",
+    "permissionId": 18,
+    "parentId": 10
+  },
+  {
+    "id": 12,
+    "name": "删除部门",
+    "url": null,
+    "icon": "el-icon-setting",
+    "permissionId": 20,
+    "parentId": 10
+  },
+  {
+    "id": 13,
+    "name": "查询部门",
+    "url": null,
+    "icon": "el-icon-setting",
+    "permissionId": 17,
+    "parentId": 10
+  },
+  {
+    "id": 14,
+    "name": "修改部门",
+    "url": null,
+    "icon": "el-icon-setting",
+    "permissionId": 19,
+    "parentId": 10
+  },
+  {
+    "id": 15,
+    "name": "菜单管理",
+    "url": "/main/system/menu",
+    "icon": "el-icon-setting",
+    "permissionId": 25,
+    "parentId": 4
+  },
+  {
+    "id": 16,
+    "name": "创建菜单",
+    "url": null,
+    "icon": "el-icon-setting",
+    "permissionId": 3,
+    "parentId": 15
+  },
+  {
+    "id": 17,
+    "name": "删除菜单",
+    "url": null,
+    "icon": "el-icon-setting",
+    "permissionId": 4,
+    "parentId": 15
+  },
+  {
+    "id": 18,
+    "name": "查询菜单",
+    "url": null,
+    "icon": "el-icon-setting",
+    "permissionId": 1,
+    "parentId": 15
+  },
+  {
+    "id": 19,
+    "name": "修改菜单",
+    "url": null,
+    "icon": "el-icon-setting",
+    "permissionId": 2,
+    "parentId": 15
+  },
+  {
+    "id": 20,
+    "name": "角色管理",
+    "url": "/main/system/role",
+    "icon": "el-icon-setting",
+    "permissionId": 24,
+    "parentId": 4
+  },
+  {
+    "id": 21,
+    "name": "创建角色",
+    "url": null,
+    "icon": "el-icon-setting",
+    "permissionId": 6,
+    "parentId": 20
+  },
+  {
+    "id": 22,
+    "name": "删除角色",
+    "url": null,
+    "icon": "el-icon-setting",
+    "permissionId": 8,
+    "parentId": 20
+  },
+  {
+    "id": 23,
+    "name": "查询角色",
+    "url": null,
+    "icon": "el-icon-setting",
+    "permissionId": 5,
+    "parentId": 20
+  },
+  {
+    "id": 24,
+    "name": "修改角色",
+    "url": null,
+    "icon": "el-icon-setting",
+    "permissionId": 7,
+    "parentId": 20
+  },
+  {
+    "id": 25,
+    "name": "商品中心",
+    "url": "/main/system/product",
+    "icon": "el-icon-shoppingBag",
+    "permissionId": 22,
+    "parentId": null
+  },
+  {
+    "id": 26,
+    "name": "创建商品",
+    "url": null,
+    "icon": "el-icon-setting",
+    "permissionId": 14,
+    "parentId": 25
+  },
+  {
+    "id": 27,
+    "name": "删除商品",
+    "url": null,
+    "icon": "el-icon-setting",
+    "permissionId": 16,
+    "parentId": 25
+  },
+  {
+    "id": 28,
+    "name": "查询商品",
+    "url": null,
+    "icon": "el-icon-setting",
+    "permissionId": 13,
+    "parentId": 25
+  },
+  {
+    "id": 29,
+    "name": "修改商品",
+    "url": null,
+    "icon": "el-icon-setting",
+    "permissionId": 15,
+    "parentId": 25
+  }
+]

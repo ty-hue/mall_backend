@@ -1,0 +1,184 @@
+[
+  {
+    "id": 1,
+    "name": "system:menu:query",
+    "intro": "查询菜单",
+    "createAt": "2021-01-02T10:03:09.000Z",
+    "updateAt": "2021-01-02T08:25:46.000Z"
+  },
+  {
+    "id": 2,
+    "name": "system:menu:update",
+    "intro": "修改菜单",
+    "createAt": "2021-01-02T10:03:09.000Z",
+    "updateAt": "2021-01-02T08:25:46.000Z"
+  },
+  {
+    "id": 3,
+    "name": "system:menu:create",
+    "intro": "新增菜单",
+    "createAt": "2021-01-02T10:03:09.000Z",
+    "updateAt": "2021-01-02T08:25:46.000Z"
+  },
+  {
+    "id": 4,
+    "name": "system:menu:delete",
+    "intro": "删除菜单",
+    "createAt": "2021-01-02T10:03:09.000Z",
+    "updateAt": "2021-01-02T08:25:46.000Z"
+  },
+  {
+    "id": 5,
+    "name": "system:role:query",
+    "intro": "查询角色",
+    "createAt": "2021-01-02T10:03:09.000Z",
+    "updateAt": "2021-01-02T08:25:46.000Z"
+  },
+  {
+    "id": 6,
+    "name": "system:role:create",
+    "intro": "新增角色",
+    "createAt": "2021-01-02T10:03:09.000Z",
+    "updateAt": "2021-01-02T08:25:46.000Z"
+  },
+  {
+    "id": 7,
+    "name": "system:role:update",
+    "intro": "修改角色",
+    "createAt": "2021-01-02T10:03:09.000Z",
+    "updateAt": "2021-01-02T08:25:46.000Z"
+  },
+  {
+    "id": 8,
+    "name": "system:role:delete",
+    "intro": "删除角色",
+    "createAt": "2021-01-02T10:03:09.000Z",
+    "updateAt": "2021-01-02T08:25:46.000Z"
+  },
+  {
+    "id": 9,
+    "name": "system:user:query",
+    "intro": "查询用户",
+    "createAt": "2021-01-02T10:03:09.000Z",
+    "updateAt": "2021-01-02T08:25:46.000Z"
+  },
+  {
+    "id": 10,
+    "name": "system:user:create",
+    "intro": "新增用户",
+    "createAt": "2021-01-02T10:03:09.000Z",
+    "updateAt": "2021-01-02T08:25:46.000Z"
+  },
+  {
+    "id": 11,
+    "name": "system:user:update",
+    "intro": "修改用户",
+    "createAt": "2021-01-02T10:03:09.000Z",
+    "updateAt": "2021-01-02T08:25:46.000Z"
+  },
+  {
+    "id": 12,
+    "name": "system:user:delete",
+    "intro": "删除用户",
+    "createAt": "2021-01-02T10:03:09.000Z",
+    "updateAt": "2021-01-02T08:25:46.000Z"
+  },
+  {
+    "id": 13,
+    "name": "system:product:query",
+    "intro": "查询商品",
+    "createAt": "2021-01-02T10:03:09.000Z",
+    "updateAt": "2021-01-02T08:25:46.000Z"
+  },
+  {
+    "id": 14,
+    "name": "system:product:create",
+    "intro": "新增商品",
+    "createAt": "2021-01-02T10:03:09.000Z",
+    "updateAt": "2021-01-02T08:25:46.000Z"
+  },
+  {
+    "id": 15,
+    "name": "system:product:update",
+    "intro": "修改商品",
+    "createAt": "2021-01-02T10:03:09.000Z",
+    "updateAt": "2021-01-02T08:25:46.000Z"
+  },
+  {
+    "id": 16,
+    "name": "system:product:delete",
+    "intro": "删除商品",
+    "createAt": "2021-01-02T10:03:09.000Z",
+    "updateAt": "2021-01-02T08:25:46.000Z"
+  },
+  {
+    "id": 17,
+    "name": "system:department:query",
+    "intro": "查询部门",
+    "createAt": "2021-01-02T10:03:09.000Z",
+    "updateAt": "2021-01-02T08:25:46.000Z"
+  },
+  {
+    "id": 18,
+    "name": "system:department:create",
+    "intro": "新增部门",
+    "createAt": "2021-01-02T10:03:09.000Z",
+    "updateAt": "2021-01-02T08:25:46.000Z"
+  },
+  {
+    "id": 19,
+    "name": "system:department:update",
+    "intro": "修改部门",
+    "createAt": "2021-01-02T10:03:09.000Z",
+    "updateAt": "2021-01-02T08:25:46.000Z"
+  },
+  {
+    "id": 20,
+    "name": "system:department:delete",
+    "intro": "删除部门",
+    "createAt": "2021-01-02T10:03:09.000Z",
+    "updateAt": "2021-01-02T08:25:46.000Z"
+  },
+  {
+    "id": 21,
+    "name": "system:department",
+    "intro": "部门管理",
+    "createAt": "2021-01-02T10:03:09.000Z",
+    "updateAt": "2021-01-02T08:25:46.000Z"
+  },
+  {
+    "id": 22,
+    "name": "system:product",
+    "intro": "商品管理",
+    "createAt": "2021-01-02T10:03:09.000Z",
+    "updateAt": "2021-01-02T08:25:46.000Z"
+  },
+  {
+    "id": 23,
+    "name": "system:user",
+    "intro": "用户管理",
+    "createAt": "2021-01-02T10:03:09.000Z",
+    "updateAt": "2021-01-02T08:25:46.000Z"
+  },
+  {
+    "id": 24,
+    "name": "system:role",
+    "intro": "角色管理",
+    "createAt": "2021-01-02T10:03:09.000Z",
+    "updateAt": "2021-01-02T08:25:46.000Z"
+  },
+  {
+    "id": 25,
+    "name": "system:menu",
+    "intro": "菜单管理",
+    "createAt": "2021-01-02T10:03:09.000Z",
+    "updateAt": "2021-01-02T08:25:46.000Z"
+  },
+  {
+    "id": 26,
+    "name": "system",
+    "intro": "系统管理",
+    "createAt": "2021-01-02T10:03:09.000Z",
+    "updateAt": "2021-01-02T08:25:46.000Z"
+  }
+]

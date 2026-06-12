@@ -6,4 +6,4 @@ export const TIME_OUT = 10 * 1000
 export const SUCCESS_CODE = 1
 
 // 无需登录的白名单
-export const WHITE_LIST = ['/login', '/register']
+export const WHITE_LIST = ['/api/login', '/api/register']
