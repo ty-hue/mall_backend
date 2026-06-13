@@ -6,6 +6,7 @@ import { useTokenStore } from './token'
 import { USERINFO_KEY } from '@/global/constant'
 import { useMenuStore } from './menu'
 import router from '@/router'
+import menuToRouteMap from '@/router/menu-to-route-map'
 export const useUserInfoStore = defineStore(
   'userinfo',
   () => {
@@ -19,6 +20,14 @@ export const useUserInfoStore = defineStore(
       userInfo.value = userInfoRes
       // 登录成功后，获取菜单
       await useMenuStore().getMenuList(userInfoRes.role.id)
+      // 登录成功后，根据菜单动态添加路由
+      const matchedRoutes = menuToRouteMap()
+      console.log(matchedRoutes)
+      matchedRoutes.forEach((route) => {
+        router.addRoute('Main', route)
+      })
+      // 跳转到首页
+      router.push({ name: 'Main', replace: true })
     }
     // 退出登录操作
     const loginoutAction = async () => {
@@ -38,6 +47,14 @@ export const useUserInfoStore = defineStore(
       userInfo.value = userInfoRes
       // 登录成功后，获取菜单
       await useMenuStore().getMenuList(userInfoRes.role.id)
+      // 登录成功后，根据菜单动态添加路由
+      const matchedRoutes = menuToRouteMap()
+      console.log(matchedRoutes)
+      matchedRoutes.forEach((route) => {
+        router.addRoute('Main', route)
+      })
+      // 跳转到首页
+      router.push({ name: 'Main', replace: true })
     }
     return {
       userInfo,

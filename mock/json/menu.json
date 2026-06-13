@@ -194,7 +194,7 @@
   {
     "id": 25,
     "name": "商品中心",
-    "url": "/main/system/product",
+    "url": "/main/product",
     "icon": "el-icon-shoppingBag",
     "permissionId": 22,
     "parentId": null
@@ -205,7 +205,7 @@
     "url": null,
     "icon": "el-icon-setting",
     "permissionId": 14,
-    "parentId": 25
+    "parentId": 31
   },
   {
     "id": 27,
@@ -213,7 +213,7 @@
     "url": null,
     "icon": "el-icon-setting",
     "permissionId": 16,
-    "parentId": 25
+    "parentId": 31
   },
   {
     "id": 28,
@@ -221,7 +221,7 @@
     "url": null,
     "icon": "el-icon-setting",
     "permissionId": 13,
-    "parentId": 25
+    "parentId": 31
   },
   {
     "id": 29,
@@ -229,6 +229,22 @@
     "url": null,
     "icon": "el-icon-setting",
     "permissionId": 15,
+    "parentId": 31
+  },
+  {
+    "id": 30,
+    "name": "商品类别",
+    "url": "/main/product/kind",
+    "icon": "el-icon-setting",
+    "permissionId": 27,
+    "parentId": 25
+  },
+  {
+    "id": 31,
+    "name": "商品信息",
+    "url": "/main/product/info",
+    "icon": "el-icon-setting",
+    "permissionId": 28,
     "parentId": 25
   }
 ]
