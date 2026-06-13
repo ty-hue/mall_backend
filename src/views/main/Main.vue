@@ -1,11 +1,13 @@
 <template>
   <div class="main">
     <el-container class="main-content">
-      <el-aside width="200px">
+      <el-aside :width="asideWidth">
         <MainAside />
       </el-aside>
       <el-container>
-        <el-header>Header</el-header>
+        <el-header>
+          <MainHeader />
+        </el-header>
         <el-main>Main</el-main>
       </el-container>
     </el-container>
@@ -14,6 +16,11 @@
 
 <script setup lang="ts">
 import MainAside from '@/components/main-aside/main-aside.vue'
+import MainHeader from '@/components/main-header/main-header.vue'
+import { useLayoutStore } from '@/stores/layout'
+import { storeToRefs } from 'pinia'
+const layoutStore = useLayoutStore()
+const { asideWidth } = storeToRefs(layoutStore)
 </script>
 
 <style lang="less" scoped>
@@ -30,7 +37,7 @@ import MainAside from '@/components/main-aside/main-aside.vue'
       text-align: left;
       cursor: pointer;
       background-color: #001529;
-      transition: width 0.3s linear;
+      transition: width 0.3s ease-in-out;
       scrollbar-width: none;
       &::-webkit-scrollbar {
         display: none;
@@ -39,6 +46,9 @@ import MainAside from '@/components/main-aside/main-aside.vue'
     }
     .el-main {
       background-color: #f0f2f5;
+    }
+    .el-header {
+      background-color: #fff;
     }
   }
 }

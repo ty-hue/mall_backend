@@ -13,6 +13,7 @@ export interface IUserInfo {
   id: number
   name: string
   realname: string
+  avatarUrl: string | null
   enabled: number
   phone: string
   createAt: string

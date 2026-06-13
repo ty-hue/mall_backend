@@ -5,6 +5,7 @@ import { ref } from 'vue'
 import { useTokenStore } from './token'
 import { USERINFO_KEY } from '@/global/constant'
 import { useMenuStore } from './menu'
+import router from '@/router'
 export const useUserInfoStore = defineStore(
   'userinfo',
   () => {
@@ -23,6 +24,10 @@ export const useUserInfoStore = defineStore(
     const loginoutAction = async () => {
       await useTokenStore().removeToken()
       userInfo.value = {} as IUserInfo
+      // 退出登录后，清空菜单
+      useMenuStore().menuList = []
+      // 跳转到登录页
+      router.push({ name: 'Login', replace: true })
     }
     // 手机号 + 验证码 登陆操作
     const loginByPhoneAction = async (account: IAccountByPhone) => {

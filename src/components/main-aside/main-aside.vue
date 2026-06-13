@@ -2,7 +2,7 @@
   <div class="main-aside">
     <div class="logo">
       <img class="logo-img" src="@/assets/img/logo.svg" alt="" />
-      <h1 class="title">Ty-CMS</h1>
+      <h1 class="title" v-show="!isExpanded">Ty-CMS</h1>
     </div>
     <div class="menu">
       <el-menu
@@ -12,6 +12,7 @@
         active-text-color="#fff"
         text-color="#b7bdc3"
         background-color="#001529"
+        :collapse="isExpanded"
       >
         <el-sub-menu :index="item.url!" v-for="item in menuList" :key="item.id">
           <template #title>
@@ -31,9 +32,12 @@
 
 <script setup lang="ts">
 import { useMenuStore } from '@/stores/menu'
+import { useLayoutStore } from '@/stores/layout'
 import { storeToRefs } from 'pinia'
 const menuStore = useMenuStore()
 const { menuList } = storeToRefs(menuStore)
+const layoutStore = useLayoutStore()
+const { isExpanded } = storeToRefs(layoutStore)
 </script>
 
 <style lang="less" scoped>
@@ -50,15 +54,18 @@ const { menuList } = storeToRefs(menuStore)
     font-weight: bold;
     color: #fff;
     .logo-img {
-      width: 60px;
-      height: 60px;
+      width: 56px;
+      height: 56px;
       object-fit: fill;
-      margin-right: 10px;
+    }
+    .title {
+      margin-left: 10px;
     }
   }
   .menu {
     flex: 1;
     .el-menu {
+      border-right: none;
       border-radius: none;
       user-select: none;
       .el-sub-menu {
