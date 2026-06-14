@@ -11,6 +11,12 @@ export const useUserInfoStore = defineStore(
   'userinfo',
   () => {
     const userInfo = ref<IUserInfo>({} as IUserInfo)
+    const addRoutesAction = () => {
+      const matchedRoutes = menuToRouteMap(useMenuStore().menuList)
+      matchedRoutes.forEach((route) => {
+        router.addRoute('Main', route)
+      })
+    }
     // 登录操作
     const loginAction = async (account: IAccount) => {
       const res = await login(account)
@@ -21,11 +27,7 @@ export const useUserInfoStore = defineStore(
       // 登录成功后，获取菜单
       await useMenuStore().getMenuList(userInfoRes.role.id)
       // 登录成功后，根据菜单动态添加路由
-      const matchedRoutes = menuToRouteMap()
-      console.log(matchedRoutes)
-      matchedRoutes.forEach((route) => {
-        router.addRoute('Main', route)
-      })
+      addRoutesAction()
       // 跳转到首页
       router.push({ name: 'Main', replace: true })
     }
@@ -48,16 +50,13 @@ export const useUserInfoStore = defineStore(
       // 登录成功后，获取菜单
       await useMenuStore().getMenuList(userInfoRes.role.id)
       // 登录成功后，根据菜单动态添加路由
-      const matchedRoutes = menuToRouteMap()
-      console.log(matchedRoutes)
-      matchedRoutes.forEach((route) => {
-        router.addRoute('Main', route)
-      })
+      addRoutesAction()
       // 跳转到首页
       router.push({ name: 'Main', replace: true })
     }
     return {
       userInfo,
+      addRoutesAction,
       loginAction,
       loginoutAction,
       loginByPhoneAction,

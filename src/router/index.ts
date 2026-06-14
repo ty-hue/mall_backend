@@ -1,6 +1,7 @@
 import { useTokenStore } from '@/stores/token'
 import { createRouter, createWebHistory } from 'vue-router'
 import { storeToRefs } from 'pinia'
+import { firstRoute } from './menu-to-route-map'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -28,11 +29,11 @@ const router = createRouter({
 })
 const whiteList = ['Login', 'NotFound']
 router.beforeEach((to, from, next) => {
-  console.log(to)
-
   const { token } = storeToRefs(useTokenStore())
   if (!whiteList.includes(to.name as string) && !token.value) {
     next({ name: 'Login' })
+  } else if (to.name === 'Main' && firstRoute) {
+    next({ name: firstRoute.name })
   } else {
     next()
   }

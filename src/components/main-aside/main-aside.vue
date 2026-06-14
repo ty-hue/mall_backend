@@ -7,7 +7,7 @@
     <div class="menu">
       <el-menu
         router
-        default-active="/main/analysis/overview"
+        :default-active="defaultActive"
         class="el-menu-vertical-demo"
         active-text-color="#fff"
         text-color="#b7bdc3"
@@ -34,10 +34,23 @@
 import { useMenuStore } from '@/stores/menu'
 import { useLayoutStore } from '@/stores/layout'
 import { storeToRefs } from 'pinia'
+import { ref, watch } from 'vue'
+import { useRoute } from 'vue-router'
 const menuStore = useMenuStore()
 const { menuList } = storeToRefs(menuStore)
 const layoutStore = useLayoutStore()
 const { isExpanded } = storeToRefs(layoutStore)
+// 根据当前页面路径匹配菜单激活项
+const defaultActive = ref('')
+const route = useRoute()
+// 监听路由变化，更新默认选中项
+watch(
+  () => route.path,
+  (newPath) => {
+    defaultActive.value = newPath
+  },
+  { immediate: true },
+)
 </script>
 
 <style lang="less" scoped>
