@@ -13,6 +13,8 @@ declare module 'vue' {
   export interface GlobalComponents {
     ElAside: typeof import('element-plus/es')['ElAside']
     ElAvatar: typeof import('element-plus/es')['ElAvatar']
+    ElBreadcrumb: typeof import('element-plus/es')['ElBreadcrumb']
+    ElBreadcrumbItem: typeof import('element-plus/es')['ElBreadcrumbItem']
     ElButton: typeof import('element-plus/es')['ElButton']
     ElCheckbox: typeof import('element-plus/es')['ElCheckbox']
     ElContainer: typeof import('element-plus/es')['ElContainer']
@@ -37,6 +39,7 @@ declare module 'vue' {
     ElSwitch: typeof import('element-plus/es')['ElSwitch']
     ElTabPane: typeof import('element-plus/es')['ElTabPane']
     ElTabs: typeof import('element-plus/es')['ElTabs']
+    HeaderBreadcrumb: typeof import('./src/components/main-header/c-cpns/header-breadcrumb.vue')['default']
     HeaderInfo: typeof import('./src/components/main-header/c-cpns/header-info.vue')['default']
     MainAside: typeof import('./src/components/main-aside/main-aside.vue')['default']
     MainHeader: typeof import('./src/components/main-header/main-header.vue')['default']

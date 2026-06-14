@@ -44,13 +44,16 @@ export interface IAccountByPhone {
   code: string
 }
 
-export interface MenuItem {
+export interface BaseMenuItem {
   id: number
   name: string
   url: string | null
   icon: string | null
   permissionId: number | null
   parentId: number | null
+}
+
+export interface MenuItem extends BaseMenuItem {
   // 递归子菜单
   children: MenuItem[]
 }

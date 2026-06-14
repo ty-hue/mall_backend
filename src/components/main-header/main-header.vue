@@ -6,7 +6,7 @@
       </el-icon>
     </div>
     <div class="content">
-      <div class="breadcrumb">面包屑</div>
+      <header-breadcrumb />
       <div class="info">
         <header-info />
       </div>
@@ -15,6 +15,7 @@
 </template>
 
 <script setup lang="ts">
+import HeaderBreadcrumb from './c-cpns/header-breadcrumb.vue'
 import { useLayoutStore } from '@/stores/layout'
 import HeaderInfo from './c-cpns/header-info.vue'
 import { storeToRefs } from 'pinia'

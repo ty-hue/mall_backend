@@ -9,6 +9,13 @@ export default function (menuList: MenuItem[]): RouteRecordRaw[] {
       for (const route of permissionRoutes) {
         if (route.path === element.url) {
           matchedRoutes.push(route)
+          if (menu.children[0]?.url) {
+            matchedRoutes.push({
+              name: menu.name,
+              path: menu.url!,
+              redirect: menu.children[0]?.url,
+            })
+          }
         }
       }
     }
