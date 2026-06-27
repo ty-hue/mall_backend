@@ -28,4 +28,20 @@ export function verifyToken(req) {
   return true
 }
 
+// 整理用户列表
+export function formatUserList(list) {
+  return list.map((item) => {
+    item.departmentId = item.department.id
+    item.roleId = item.role.id
+    delete item.department
+    delete item.role
+    return item
+  })
+}
+
+// 深拷贝
+export function deepClone(obj) {
+  return JSON.parse(JSON.stringify(obj))
+}
+
 export { Mock } from 'mockjs'

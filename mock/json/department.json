@@ -6,5 +6,37 @@
     "leader": "小汤",
     "createAt": "2021-01-02T10:03:09.000Z",
     "updateAt": "2021-01-02T08:25:46.000Z"
+  },
+  {
+    "id": 2,
+    "name": "研发部",
+    "parentId": null,
+    "leader": "小李",
+    "createAt": "2021-01-02T10:03:09.000Z",
+    "updateAt": "2021-01-02T08:25:46.000Z"
+  },
+  {
+    "id": 3,
+    "name": "人事部",
+    "parentId": null,
+    "leader": "小东",
+    "createAt": "2021-01-02T10:03:09.000Z",
+    "updateAt": "2021-01-02T08:25:46.000Z"
+  },
+  {
+    "id": 4,
+    "name": "运维部",
+    "parentId": null,
+    "leader": "小强",
+    "createAt": "2021-01-02T10:03:09.000Z",
+    "updateAt": "2021-01-02T08:25:46.000Z"
+  },
+  {
+    "id": 5,
+    "name": "UI设计部",
+    "parentId": null,
+    "leader": "小王",
+    "createAt": "2021-01-02T10:03:09.000Z",
+    "updateAt": "2021-01-02T08:25:46.000Z"
   }
 ]
