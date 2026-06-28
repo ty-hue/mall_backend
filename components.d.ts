@@ -39,6 +39,7 @@ declare module 'vue' {
     ElMenuItemGroup: typeof import('element-plus/es')['ElMenuItemGroup']
     ElOption: typeof import('element-plus/es')['ElOption']
     ElPagination: typeof import('element-plus/es')['ElPagination']
+    ElPopconfirm: typeof import('element-plus/es')['ElPopconfirm']
     ElRadio: typeof import('element-plus/es')['ElRadio']
     ElRadioButton: typeof import('element-plus/es')['ElRadioButton']
     ElRadioGroup: typeof import('element-plus/es')['ElRadioGroup']
@@ -56,6 +57,9 @@ declare module 'vue' {
     HeaderInfo: typeof import('./src/components/main-header/c-cpns/header-info.vue')['default']
     MainAside: typeof import('./src/components/main-aside/main-aside.vue')['default']
     MainHeader: typeof import('./src/components/main-header/main-header.vue')['default']
+    PageContent: typeof import('./src/components/page-content.vue')['default']
+    PageModal: typeof import('./src/components/page-modal.vue')['default']
+    PageSearch: typeof import('./src/components/page-search.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
   }

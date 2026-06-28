@@ -128,6 +128,10 @@ const request = {
   delete<T = unknown>(url: string, params?: unknown, config?: CustomRequestConfig): Promise<T> {
     return service.delete(url, { params, ...config }).then((res) => res.data)
   },
+
+  patch<T = unknown>(url: string, data?: unknown, config?: CustomRequestConfig): Promise<T> {
+    return service.patch(url, data, config).then((res) => res.data)
+  },
 }
 
 export default request

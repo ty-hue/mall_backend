@@ -1,29 +1,39 @@
 <template>
   <div class="user">
     <div class="search">
-      <PageSearch ref="searchRef" :load="loadPageData" @search="search" />
+      <PageSearch ref="searchRef" @search="search" :searchConfig="searchConfig" />
     </div>
     <div class="content">
       <PageContent
         ref="contentRef"
         :load="loadPageData"
-        :roleList="roleList"
-        :departmentList="departmentList"
+        :contentConfig="contentConfig"
+        :modalConfig="modalConfig"
+        :dataLists="dataLists"
       />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import PageSearch from './c-cpns/page-search.vue'
-import PageContent from './c-cpns/page-content.vue'
+import PageSearch from '@/components/page-search.vue'
+import PageContent from '@/components/page-content.vue'
 import { getPageList } from '@/service/apis/main.ts'
-import { onMounted, ref } from 'vue'
+import { onMounted, reactive, ref } from 'vue'
 import type { IRole } from '@/types/role.ts'
 import type { IDepartment } from '@/types/department.ts'
+import { searchConfig } from './config/search.config.ts'
+import { contentConfig } from './config/content.config.ts'
+import { modalConfig } from './config/modal.config.ts'
+
 const searchRef = ref<InstanceType<typeof PageSearch>>()
 const contentRef = ref<InstanceType<typeof PageContent>>()
-const loadPageData = async <T,>(
+
+const roleList = ref<IRole[]>([])
+const departmentList = ref<IDepartment[]>([])
+const dataLists = reactive({ roleList, departmentList })
+
+const loadPageData = async <T extends Record<string, unknown>>(
   url: string,
   preCallback?: () => void,
   nextCallback?: (res: { list: T[]; total: number }) => void,
@@ -38,34 +48,26 @@ const loadPageData = async <T,>(
   nextCallback?.(res)
 }
 
-// 表单查询
-const search = async () => {
-  contentRef.value?.loadData(false, true)
-}
-const roleList = ref<IRole[]>([])
-const departmentList = ref<IDepartment[]>([])
+const search = () => contentRef.value?.loadData(false, true)
 
-// 加载角色列表和部门列表
-const loadRoleData = async () => {
+type RowData = Record<string, unknown>
+
+const loadSelectOptions = async () => {
   for (const url of ['role', 'department']) {
-    await loadPageData<IRole>(
+    await loadPageData<RowData>(
       url,
       () => {},
-      (res: { list: IRole[] | IDepartment[]; total: number }) => {
-        if (url === 'role') {
-          roleList.value = res.list as IRole[]
-        } else {
-          departmentList.value = res.list as IDepartment[]
-        }
+      (res) => {
+        if (url === 'role') roleList.value = res.list as unknown as IRole[]
+        else departmentList.value = res.list as unknown as IDepartment[]
       },
       true,
       true,
     )
   }
 }
-onMounted(() => {
-  loadRoleData()
-})
+
+onMounted(() => loadSelectOptions())
 </script>
 
 <style lang="less" scoped>
