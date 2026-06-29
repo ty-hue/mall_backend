@@ -36,12 +36,27 @@
             }}</template>
           </el-table-column>
           <el-table-column
-            v-else-if="col.type === 'slot'"
+            v-else-if="col.type === 'custom'"
             :label="col.label"
             :width="col.width"
             :align="col.align || 'center'"
           >
             <template #default="scope"><slot :name="col.slotName" :row="scope.row" /></template>
+          </el-table-column>
+          <el-table-column v-else-if="col.type === 'handler'" :label="col.label" align="center">
+            <template #default="scope">
+              <el-button type="primary" size="small" @click="handleEdit(scope.row)" icon="edit"
+                >编辑</el-button
+              >
+              <el-popconfirm
+                :title="contentConfig.deleteConfirmText || '确认删除？'"
+                @confirm="handleDelete(scope.row)"
+              >
+                <template #reference
+                  ><el-button type="danger" size="small" icon="delete">删除</el-button></template
+                >
+              </el-popconfirm>
+            </template>
           </el-table-column>
           <el-table-column
             v-else
@@ -51,21 +66,6 @@
             :align="col.align || 'center'"
           />
         </template>
-        <el-table-column label="操作" align="center">
-          <template #default="scope">
-            <el-button type="primary" size="small" @click="handleEdit(scope.row)" icon="edit"
-              >编辑</el-button
-            >
-            <el-popconfirm
-              :title="contentConfig.deleteConfirmText || '确认删除？'"
-              @confirm="handleDelete(scope.row)"
-            >
-              <template #reference
-                ><el-button type="danger" size="small" icon="delete">删除</el-button></template
-              >
-            </el-popconfirm>
-          </template>
-        </el-table-column>
       </el-table>
       <div class="pagination">
         <el-pagination

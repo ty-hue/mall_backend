@@ -11,6 +11,7 @@ export const contentConfig: IContentConfig<IDepartment> = {
     { prop: 'leader', label: '部门领导人', width: 180, align: 'center' },
     { prop: 'create_time', label: '创建时间', align: 'center', type: 'date' },
     { prop: 'update_time', label: '更新时间', align: 'center', type: 'date' },
+    { label: '操作', align: 'center', type: 'handler' },
   ],
   deleteConfirmText: '确认删除该部门吗？',
 }

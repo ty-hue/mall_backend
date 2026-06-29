@@ -19,6 +19,7 @@ export const contentConfig: IContentConfig<IUser> = {
     },
     { prop: 'createAt', label: '创建时间', align: 'center', type: 'date' },
     { prop: 'updateAt', label: '更新时间', align: 'center', type: 'date' },
+    { label: '操作', align: 'center', type: 'handler' },
   ],
   deleteConfirmText: '确认删除该用户吗？',
 }
