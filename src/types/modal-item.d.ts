@@ -1,9 +1,9 @@
 /** 弹窗表单字段配置 */
-export interface IModalField {
+export interface IModalField<T extends Record<string, unknown> = Record<string, unknown>> {
   /** 字段标签 */
   label: string
   /** 字段属性名 */
-  prop: string
+  prop: keyof T
   /** 表单控件类型 */
   type: 'input' | 'password' | 'switch' | 'select'
   /** 占位文本 */
@@ -23,11 +23,11 @@ export interface IModalField {
 }
 
 /** 弹窗表单配置 */
-export interface IModalConfig {
+export interface IModalConfig<T extends Record<string, unknown> = Record<string, unknown>> {
   /** 实体名称，用于标题拼接（如"用户"→"新建用户"/"编辑用户"） */
   entityName: string
   /** API 路径 */
   apiUrl: string
   /** 表单字段配置 */
-  fields: IModalField[]
+  fields: IModalField<T>[]
 }

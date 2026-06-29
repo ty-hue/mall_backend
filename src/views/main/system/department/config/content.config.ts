@@ -1,6 +1,7 @@
 ﻿import type { IContentConfig } from '@/types/content-item'
+import type { IDepartment } from '@/types/department'
 
-export const contentConfig: IContentConfig = {
+export const contentConfig: IContentConfig<IDepartment> = {
   title: '部门列表',
   addBtnText: '新建部门',
   apiUrl: 'department',

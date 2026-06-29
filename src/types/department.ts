@@ -1,4 +1,5 @@
 export interface IDepartment {
+  [key: string]: unknown
   id: number
   name: string
   leader: string

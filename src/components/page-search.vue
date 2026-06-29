@@ -1,6 +1,6 @@
 ﻿<template>
   <div class="page-search">
-    <el-form :model="formData" ref="formRef" size="large">
+    <el-form :model="formData as any" ref="formRef" size="large">
       <el-row :gutter="20">
         <el-col :span="item.span" v-for="item in searchConfig" :key="item.prop">
           <el-form-item
@@ -9,10 +9,18 @@
             :label-width="item.labelWidth"
           >
             <template v-if="item.type === 'input'">
-              <el-input v-model="formData[item.prop] as string" :placeholder="item.placeholder" />
+              <el-input
+                :model-value="(formData as any)[item.prop]"
+                :placeholder="item.placeholder"
+                @update:model-value="(v: string) => ((formData as any)[item.prop] = v)"
+              />
             </template>
             <template v-else-if="item.type === 'select'">
-              <el-select v-model="formData[item.prop] as number" :placeholder="item.placeholder">
+              <el-select
+                :model-value="(formData as any)[item.prop]"
+                :placeholder="item.placeholder"
+                @update:model-value="(v: number) => ((formData as any)[item.prop] = v)"
+              >
                 <el-option
                   v-for="option in item.options"
                   :key="option.value"
@@ -23,12 +31,13 @@
             </template>
             <template v-else-if="item.type === 'date-picker'">
               <el-date-picker
-                v-model="formData[item.prop] as string[]"
+                :model-value="(formData as any)[item.prop]"
                 type="daterange"
                 value-format="yyyy-MM-dd"
                 range-separator="-"
                 start-placeholder="开始日期"
                 end-placeholder="结束日期"
+                @update:model-value="(v: string[]) => ((formData as any)[item.prop] = v)"
               />
             </template>
           </el-form-item>
@@ -53,26 +62,24 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup lang="ts" generic="T extends Record<string, unknown>">
 import type { IFormItem } from '@/types'
 import type { ElForm } from 'element-plus'
-import { ref, type PropType } from 'vue'
+import { ref } from 'vue'
 
-type RowData = Record<string, unknown>
+const props = defineProps<{
+  searchConfig: IFormItem<T>[]
+}>()
+const emit = defineEmits<{ search: [] }>()
 
-const props = defineProps({
-  searchConfig: { type: Array as PropType<IFormItem<RowData>[]>, required: true },
-})
-const emit = defineEmits(['search'])
-
-const initialValue: RowData = {}
+const initialValue: Partial<T> = {}
 for (const item of props.searchConfig) {
-  initialValue[item.prop] = item.initialValue
+  initialValue[item.prop] = item.initialValue as T[keyof T]
 }
 
-const formData = ref<Partial<RowData>>(initialValue)
+const formData = ref<Partial<T>>(initialValue)
 const formRef = ref<InstanceType<typeof ElForm>>()
-// 重置表单
+
 const resetForm = () => {
   formRef.value?.resetFields()
 }

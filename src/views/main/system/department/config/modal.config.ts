@@ -1,6 +1,7 @@
-import type { IModalConfig } from '@/types/modal-item'
+﻿import type { IModalConfig } from '@/types/modal-item'
+import type { IDepartment } from '@/types/department'
 
-export const modalConfig: IModalConfig = {
+export const modalConfig: IModalConfig<IDepartment> = {
   entityName: '部门',
   apiUrl: 'department',
   fields: [

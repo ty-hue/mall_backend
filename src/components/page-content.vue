@@ -1,4 +1,4 @@
-﻿<template>
+<template>
   <div class="page-content">
     <div class="page-content-header">
       <div class="page-content-header-title">{{ contentConfig.title }}</div>
@@ -83,50 +83,57 @@
       ref="pageModalRef"
       :modalConfig="modalConfig"
       :dataLists="dataLists"
-      @refresh="loadData"
+      @refresh="loadData()"
     />
   </div>
 </template>
 
-<script setup lang="ts">
+<script
+  setup
+  lang="ts"
+  generic="T extends Record<string, unknown>, U extends Record<string, unknown>"
+>
 import { formatDate } from '@/utils/format'
-import { onMounted, reactive, ref, type PropType } from 'vue'
+import { onMounted, reactive, ref } from 'vue'
 import PageModal from '@/components/page-modal.vue'
 import { deleteApi } from '@/service/apis/main.ts'
 import type { IContentConfig } from '@/types/content-item'
 import type { IModalConfig } from '@/types/modal-item'
 
-type RowData = Record<string, unknown>
-
-type LoadFn = (
-  url: string,
-  preCallback?: () => void,
-  nextCallback?: (res: { list: RowData[]; total: number }) => void,
-  isInit?: boolean,
-  isAll?: boolean,
-) => void
-
-const props = defineProps({
-  load: { type: Function as PropType<LoadFn>, required: true },
-  contentConfig: {
-    type: Object as PropType<IContentConfig<Record<string, unknown>>>,
-    required: true,
-  },
-  modalConfig: { type: Object as PropType<IModalConfig>, required: true },
-  dataLists: { type: Object as PropType<Record<string, RowData[]>>, default: () => ({}) },
-})
+const props = defineProps<{
+  load: (
+    url: string,
+    preCallback?: () => void,
+    nextCallback?: (res: { list: T[]; total: number }) => void,
+    isInit?: boolean,
+    isAll?: boolean,
+  ) => void
+  contentConfig: IContentConfig<T>
+  modalConfig: IModalConfig<U>
+  dataLists?: Record<string, Record<string, unknown>[]>
+}>()
 
 const pagination = reactive({ currentPage: 1, pageSize: 10 })
 const totalNum = ref(0)
-const tableData = ref<RowData[]>([])
-const pageModalRef = ref<InstanceType<typeof PageModal>>()
+const tableData = ref<T[]>([])
 
-const handleEdit = (row: RowData) => pageModalRef.value?.handleOpenDialog(row, false)
-const handleAdd = () => pageModalRef.value?.handleOpenDialog({} as RowData)
+/** 泛型组件无法用 InstanceType，手动声明暴露接口 */
+interface PageModalExposed {
+  handleOpenDialog: (data: Record<string, unknown>, isAdd?: boolean) => void
+}
 
-const handleDelete = async (row: RowData) => {
+const pageModalRef = ref<PageModalExposed | null>(null)
+
+const handleEdit = (row: T) => {
+  pageModalRef.value?.handleOpenDialog(row as unknown as Record<string, unknown>, false)
+}
+const handleAdd = () => {
+  pageModalRef.value?.handleOpenDialog({} as Record<string, unknown>)
+}
+
+const handleDelete = async (row: T) => {
   await deleteApi(props.contentConfig.apiUrl, { id: row.id as number })
-  loadData(true)
+  loadData()
 }
 
 const loadData = (isInit?: boolean, isSearch = false) => {
@@ -148,11 +155,11 @@ const loadData = (isInit?: boolean, isSearch = false) => {
 
 const handleCurrentChange = async (val: number) => {
   pagination.currentPage = val
-  await loadData(false)
+  await loadData()
 }
 const handleSizeChange = async (val: number) => {
   pagination.pageSize = val
-  await loadData(false)
+  await loadData()
 }
 
 onMounted(() => loadData(true))

@@ -1,6 +1,9 @@
-import type { IModalConfig } from '@/types/modal-item'
+﻿import type { IModalConfig } from '@/types/modal-item'
+import type { IUser } from '@/types/users'
 
-export const modalConfig: IModalConfig = {
+type UserFormData = IUser & { password?: string }
+
+export const modalConfig: IModalConfig<UserFormData> = {
   entityName: '用户',
   apiUrl: 'user',
   fields: [
@@ -14,13 +17,7 @@ export const modalConfig: IModalConfig = {
       onlyOnAdd: true,
     },
     { prop: 'phone', label: '电话号码', type: 'input', placeholder: '请输入电话号码' },
-    {
-      prop: 'enabled',
-      label: '状态',
-      type: 'switch',
-      activeValue: 1,
-      inactiveValue: 0,
-    },
+    { prop: 'enabled', label: '状态', type: 'switch', activeValue: 1, inactiveValue: 0 },
     {
       prop: 'roleId',
       label: '角色',

@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <div class="user">
     <div class="search">
       <PageSearch ref="searchRef" @search="search" :searchConfig="searchConfig" />
@@ -26,8 +26,17 @@ import { searchConfig } from './config/search.config.ts'
 import { contentConfig } from './config/content.config.ts'
 import { modalConfig } from './config/modal.config.ts'
 
-const searchRef = ref<InstanceType<typeof PageSearch>>()
-const contentRef = ref<InstanceType<typeof PageContent>>()
+/** 泛型组件无法用 InstanceType，手动声明暴露接口 */
+interface SearchExposed {
+  formData: Record<string, unknown>
+}
+interface ContentExposed {
+  pagination: { currentPage: number; pageSize: number }
+  loadData: (isInit?: boolean, isSearch?: boolean) => void
+}
+
+const searchRef = ref<SearchExposed | null>(null)
+const contentRef = ref<ContentExposed | null>(null)
 
 const roleList = ref<IRole[]>([])
 const departmentList = ref<IDepartment[]>([])
@@ -50,21 +59,25 @@ const loadPageData = async <T extends Record<string, unknown>>(
 
 const search = () => contentRef.value?.loadData(false, true)
 
-type RowData = Record<string, unknown>
-
 const loadSelectOptions = async () => {
-  for (const url of ['role', 'department']) {
-    await loadPageData<RowData>(
-      url,
-      () => {},
-      (res) => {
-        if (url === 'role') roleList.value = res.list as unknown as IRole[]
-        else departmentList.value = res.list as unknown as IDepartment[]
-      },
-      true,
-      true,
-    )
-  }
+  await loadPageData<IRole>(
+    'role',
+    () => {},
+    (res) => {
+      roleList.value = res.list
+    },
+    true,
+    true,
+  )
+  await loadPageData<IDepartment>(
+    'department',
+    () => {},
+    (res) => {
+      departmentList.value = res.list
+    },
+    true,
+    true,
+  )
 }
 
 onMounted(() => loadSelectOptions())
