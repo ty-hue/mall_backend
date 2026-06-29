@@ -1,5 +1,5 @@
 /** 表格列配置 */
-export interface IContentColumn<T extends Record<string, unknown> = Record<string, unknown>> {
+export interface IContentColumn<T> {
   /** 列属性名 */
   prop?: keyof T
   /** 列标题 */
@@ -17,7 +17,7 @@ export interface IContentColumn<T extends Record<string, unknown> = Record<strin
 }
 
 /** 表格内容配置 */
-export interface IContentConfig<T extends Record<string, unknown> = Record<string, unknown>> {
+export interface IContentConfig<T> {
   /** 页面标题 */
   title: string
   /** 新建按钮文字 */

@@ -57,7 +57,7 @@
   </el-dialog>
 </template>
 
-<script setup lang="ts" generic="T extends Record<string, unknown>">
+<script setup lang="ts" generic="T">
 import { addApi, updateApi } from '@/service/apis/main'
 import { ref } from 'vue'
 import type { IModalConfig } from '@/types/modal-item'

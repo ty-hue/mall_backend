@@ -1,5 +1,5 @@
 /** 弹窗表单字段配置 */
-export interface IModalField<T extends Record<string, unknown> = Record<string, unknown>> {
+export interface IModalField<T> {
   /** 字段标签 */
   label: string
   /** 字段属性名 */
@@ -23,7 +23,7 @@ export interface IModalField<T extends Record<string, unknown> = Record<string, 
 }
 
 /** 弹窗表单配置 */
-export interface IModalConfig<T extends Record<string, unknown> = Record<string, unknown>> {
+export interface IModalConfig<T> {
   /** 实体名称，用于标题拼接（如"用户"→"新建用户"/"编辑用户"） */
   entityName: string
   /** API 路径 */

@@ -62,7 +62,7 @@
   </div>
 </template>
 
-<script setup lang="ts" generic="T extends Record<string, unknown>">
+<script setup lang="ts" generic="T">
 import type { IFormItem } from '@/types'
 import type { ElForm } from 'element-plus'
 import { ref } from 'vue'
@@ -76,6 +76,8 @@ const initialValue: Partial<T> = {}
 for (const item of props.searchConfig) {
   initialValue[item.prop] = item.initialValue as T[keyof T]
 }
+
+console.log(initialValue)
 
 const formData = ref<Partial<T>>(initialValue)
 const formRef = ref<InstanceType<typeof ElForm>>()

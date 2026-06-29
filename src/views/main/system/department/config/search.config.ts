@@ -1,13 +1,7 @@
 ﻿import type { IFormItem } from '@/types'
+import type { IDepartment } from '@/types/department'
 
-/** 部门搜索表单参数类型 */
-interface DepartmentSearchParams {
-  [key: string]: unknown
-  name: string
-  leader: string
-}
-
-export const searchConfig: IFormItem<DepartmentSearchParams>[] = [
+export const searchConfig: IFormItem<IDepartment>[] = [
   {
     label: '部门名称',
     prop: 'name',

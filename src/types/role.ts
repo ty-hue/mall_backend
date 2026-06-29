@@ -1,5 +1,4 @@
 export interface IRole {
-  [key: string]: unknown
   id: number
   name: string
   intro: string

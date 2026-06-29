@@ -14,7 +14,7 @@ export const useSystemRootPageHook = () => {
   const searchRef = ref<SearchExposed | null>(null)
   const contentRef = ref<ContentExposed | null>(null)
 
-  const loadPageData = async <T extends Record<string, unknown>>(
+  const loadPageData = async <T>(
     url: string,
     preCallback?: () => void,
     nextCallback?: (res: { list: T[]; total: number }) => void,

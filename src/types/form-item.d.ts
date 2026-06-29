@@ -1,4 +1,4 @@
-export interface IFormItem<T extends Record<string, unknown> = Record<string, unknown>> {
+export interface IFormItem<T> {
   label: string
   prop: keyof T
   type: string

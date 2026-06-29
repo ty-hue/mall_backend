@@ -9,7 +9,7 @@
       </div>
     </div>
     <div class="page-content-table">
-      <el-table :data="tableData" border style="width: 100%">
+      <el-table :data="tableData as Record<string, unknown>[]" border style="width: 100%">
         <template v-for="col in contentConfig.columns" :key="String(col.prop)">
           <el-table-column
             v-if="col.type === 'tag'"
@@ -88,11 +88,7 @@
   </div>
 </template>
 
-<script
-  setup
-  lang="ts"
-  generic="T extends Record<string, unknown>, U extends Record<string, unknown>"
->
+<script setup lang="ts" generic="T, U">
 import { formatDate } from '@/utils/format'
 import { onMounted, reactive, ref } from 'vue'
 import PageModal from '@/components/page-modal.vue'
@@ -132,7 +128,9 @@ const handleAdd = () => {
 }
 
 const handleDelete = async (row: T) => {
-  await deleteApi(props.contentConfig.apiUrl, { id: row.id as number })
+  await deleteApi(props.contentConfig.apiUrl, {
+    id: (row as unknown as Record<string, unknown>).id as number,
+  })
   loadData()
 }
 

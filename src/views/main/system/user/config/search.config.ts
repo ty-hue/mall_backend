@@ -1,16 +1,8 @@
 ﻿import type { IFormItem } from '@/types'
-
+import type { IUser } from '@/types/users'
 /** 用户搜索表单参数类型 */
-interface UserSearchParams {
-  [key: string]: unknown
-  name: string
-  realname: string
-  phone: string
-  enabled: number
-  createAt: string[]
-}
 
-export const searchConfig: IFormItem<UserSearchParams>[] = [
+export const searchConfig: IFormItem<IUser>[] = [
   {
     label: '用户名',
     prop: 'name',
