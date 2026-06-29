@@ -19,8 +19,9 @@ export default [
         userList = userList.filter((item) =>
           Object.keys(condition).every((key) => {
             const searchVal = condition[key]
-            // 搜索值为空、null、undefined、空字符串，跳过当前字段校验
+            // 搜索值为空、null、undefined、空字符串、空数组，跳过当前字段校验
             if ([null, undefined, ''].includes(searchVal)) return true
+            if (Array.isArray(searchVal) && searchVal.length === 0) return true
             // 匹配当前字段
             return item[key] == searchVal
           }),
