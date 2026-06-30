@@ -262,12 +262,13 @@
   },
   {
     "id": 30,
-    "name": "商品类别",
+    "name": "商品种类",
     "url": "/main/product/kind",
     "icon": null,
     "permissionId": 27,
     "parentId": 25,
-    "permission": null
+    "permission": null,
+    "children": []
   },
   {
     "id": 31,

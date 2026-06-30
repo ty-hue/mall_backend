@@ -1,6 +1,8 @@
 import menu from './json/menu.json'
 import role from './json/role.json'
-import { resSuccess, resFail } from './common'
+import { resSuccess, resFail, deepClone, writeJsonFile } from './common'
+import path from 'path'
+const menuJsonPath = path.join(__dirname, './json/menu.json')
 // 菜单转树形结构工具函数
 function buildMenuTree(list) {
   const tree = []
@@ -69,6 +71,79 @@ export default [
         total: menuTree.length,
         list: menuTree.slice(start, end),
       })
+    },
+  },
+  // 获取全部菜单（树形结构，用于角色权限选择等）
+  {
+    method: 'get',
+    url: '/api/menu',
+    response: () => {
+      const menuTree = buildMenuTree(menu)
+      return resSuccess(menuTree)
+    },
+  },
+  // 新建菜单接口
+  {
+    method: 'put',
+    url: '/api/menu',
+    response: ({ body }) => {
+      const newMenu = deepClone(body)
+      newMenu.id = menu.length > 0 ? Math.max(...menu.map((m) => m.id)) + 1 : 1
+      newMenu.parentId = newMenu.parentId ?? null
+      newMenu.permissionId = newMenu.permissionId ?? null
+      newMenu.permission = newMenu.permission ?? null
+      newMenu.icon = newMenu.icon ?? null
+      newMenu.url = newMenu.url ?? null
+      menu.unshift(newMenu)
+      writeJsonFile(menuJsonPath, menu)
+      return resSuccess(null)
+    },
+  },
+  // 更新菜单接口
+  {
+    method: 'patch',
+    url: '/api/menu/:id',
+    response: (req) => {
+      const id = Number(req.url.split('/').pop())
+      const menuItem = menu.find((item) => item.id === id)
+      if (!menuItem) {
+        return resSuccess({ code: 404, msg: '菜单不存在' })
+      }
+      Object.assign(menuItem, req.body)
+      writeJsonFile(menuJsonPath, menu)
+      return resSuccess(null)
+    },
+  },
+  // 删除菜单接口（级联删除子菜单）
+  {
+    method: 'delete',
+    url: '/api/menu/:id',
+    response: (req) => {
+      const id = Number(req.url.split('/').pop())
+      const idx = menu.findIndex((item) => item.id === id)
+      if (idx === -1) {
+        return resSuccess({ code: 404, msg: '菜单不存在' })
+      }
+      // 收集所有需要删除的id（当前节点 + 所有子孙节点）
+      const idsToDelete = new Set([id])
+      let changed = true
+      while (changed) {
+        changed = false
+        menu.forEach((item) => {
+          if (item.parentId !== null && idsToDelete.has(item.parentId) && !idsToDelete.has(item.id)) {
+            idsToDelete.add(item.id)
+            changed = true
+          }
+        })
+      }
+      // 删除所有匹配的菜单项
+      for (let i = menu.length - 1; i >= 0; i--) {
+        if (idsToDelete.has(menu[i].id)) {
+          menu.splice(i, 1)
+        }
+      }
+      writeJsonFile(menuJsonPath, menu)
+      return resSuccess(null)
     },
   },
 ]
