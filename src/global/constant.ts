@@ -9,3 +9,4 @@ export const LAYOUT_KEY = 'xuyu_layout'
 export const THEME_MODE_KEY = 'xuyu_theme_mode'
 export const DEFAULT_AVATAR_URL =
   'https://gips2.baidu.com/it/u=2117309411,3083947594&fm=3074&app=3074&f=PNG?w=2048&h=2048'
+export const PERMISSIONS_KEY = 'xuyu_permissions'

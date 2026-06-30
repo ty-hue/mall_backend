@@ -284,64 +284,6 @@
     }
   },
   {
-    "id": 18,
-    "username": "admin",
-    "password": "Ty6566360123@",
-    "token": "wqewqijdiwhihi@nfiikadslka",
-    "name": "小汤",
-    "realname": "小汤",
-    "enabled": 1,
-    "phone": "15573010566",
-    "code": "1234",
-    "createAt": "2021-01-02T10:00:00.000Z",
-    "updateAt": "2021-01-02T04:00:00.000Z",
-    "avatarUrl": "https://gips0.baidu.com/it/u=3560029307,576412274&fm=3028&app=3028&f=JPEG&fmt=auto?w=960&h=1280",
-    "role": {
-      "id": 1,
-      "name": "超级管理员",
-      "intro": "所有权限",
-      "createAt": "2021-01-02T10:01:52.000Z",
-      "updateAt": "2021-01-02T10:01:52.000Z"
-    },
-    "department": {
-      "id": 1,
-      "name": "总裁办",
-      "parentId": null,
-      "leader": "小汤",
-      "createAt": "2021-01-02T10:03:09.000Z",
-      "updateAt": "2021-01-02T08:25:46.000Z"
-    }
-  },
-  {
-    "id": 19,
-    "username": "admin",
-    "password": "Ty6566360123@",
-    "token": "wqewqijdiwhihi@nfiikadslka",
-    "name": "小汤",
-    "realname": "小汤",
-    "enabled": 1,
-    "phone": "15573010566",
-    "code": "1234",
-    "createAt": "2021-01-02T10:00:00.000Z",
-    "updateAt": "2021-01-02T04:00:00.000Z",
-    "avatarUrl": "https://gips0.baidu.com/it/u=3560029307,576412274&fm=3028&app=3028&f=JPEG&fmt=auto?w=960&h=1280",
-    "role": {
-      "id": 1,
-      "name": "超级管理员",
-      "intro": "所有权限",
-      "createAt": "2021-01-02T10:01:52.000Z",
-      "updateAt": "2021-01-02T10:01:52.000Z"
-    },
-    "department": {
-      "id": 1,
-      "name": "总裁办",
-      "parentId": null,
-      "leader": "小汤",
-      "createAt": "2021-01-02T10:03:09.000Z",
-      "updateAt": "2021-01-02T08:25:46.000Z"
-    }
-  },
-  {
     "id": 20,
     "username": "admin",
     "password": "Ty6566360123@",

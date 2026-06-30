@@ -7,6 +7,8 @@ import { USERINFO_KEY } from '@/global/constant'
 import { useMenuStore } from './menu'
 import router from '@/router'
 import menuToRouteMap from '@/router/menu-to-route-map'
+import menuToBtnPermissionsMap from '@/utils/menu-to-btnPermissions-map'
+import { usePermissionsStore } from './permissions'
 export const useUserInfoStore = defineStore(
   'userinfo',
   () => {
@@ -28,6 +30,8 @@ export const useUserInfoStore = defineStore(
       await useMenuStore().getMenuList(userInfoRes.role.id)
       // 登录成功后，根据菜单动态添加路由
       addRoutesAction()
+      // 登录成功后，获取权限
+      await usePermissionsStore().setPermissions(menuToBtnPermissionsMap(useMenuStore().menuList))
       // 跳转到首页
       router.push({ name: 'Main', replace: true })
     }
@@ -37,6 +41,8 @@ export const useUserInfoStore = defineStore(
       userInfo.value = {} as IUserInfo
       // 退出登录后，清空菜单
       useMenuStore().menuList = []
+      // 退出登录后，清空权限
+      usePermissionsStore().removePermissions()
       // 跳转到登录页
       router.push({ name: 'Login', replace: true })
     }
@@ -51,6 +57,8 @@ export const useUserInfoStore = defineStore(
       await useMenuStore().getMenuList(userInfoRes.role.id)
       // 登录成功后，根据菜单动态添加路由
       addRoutesAction()
+      // 登录成功后，获取权限
+      await usePermissionsStore().setPermissions(menuToBtnPermissionsMap(useMenuStore().menuList))
       // 跳转到首页
       router.push({ name: 'Main', replace: true })
     }
