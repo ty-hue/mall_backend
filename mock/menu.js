@@ -3,6 +3,7 @@ import role from './json/role.json'
 import { resSuccess, resFail, deepClone, writeJsonFile } from './common'
 import path from 'path'
 const menuJsonPath = path.join(__dirname, './json/menu.json')
+const roleJsonPath = path.join(__dirname, './json/role.json')
 // 菜单转树形结构工具函数
 function buildMenuTree(list) {
   const tree = []
@@ -114,7 +115,7 @@ export default [
       return resSuccess(null)
     },
   },
-  // 删除菜单接口（级联删除子菜单）
+  // 删除菜单接口（级联删除子菜单 + 清理角色权限）
   {
     method: 'delete',
     url: '/api/menu/:id',
@@ -124,21 +125,37 @@ export default [
       if (idx === -1) {
         return resSuccess({ code: 404, msg: '菜单不存在' })
       }
-      // 收集所有需要删除的id（当前节点 + 所有子孙节点）
-      const idsToDelete = new Set([id])
+      // 收集所有需要删除的菜单id（当前节点 + 所有子孙节点）
+      const menuIdsToDelete = new Set([id])
       let changed = true
       while (changed) {
         changed = false
         menu.forEach((item) => {
-          if (item.parentId !== null && idsToDelete.has(item.parentId) && !idsToDelete.has(item.id)) {
-            idsToDelete.add(item.id)
+          if (
+            item.parentId !== null &&
+            menuIdsToDelete.has(item.parentId) &&
+            !menuIdsToDelete.has(item.id)
+          ) {
+            menuIdsToDelete.add(item.id)
             changed = true
           }
         })
       }
+      // 收集所有需要删除的 permissionId
+      const permissionIdsToDelete = new Set()
+      menu.forEach((item) => {
+        if (menuIdsToDelete.has(item.id) && item.permissionId !== null) {
+          permissionIdsToDelete.add(item.permissionId)
+        }
+      })
+      // 从所有角色的 permissions 中移除被删除菜单的 permissionId
+      role.forEach((roleItem) => {
+        roleItem.permissions = roleItem.permissions.filter((p) => !permissionIdsToDelete.has(p))
+      })
+      writeJsonFile(roleJsonPath, role)
       // 删除所有匹配的菜单项
       for (let i = menu.length - 1; i >= 0; i--) {
-        if (idsToDelete.has(menu[i].id)) {
+        if (menuIdsToDelete.has(menu[i].id)) {
           menu.splice(i, 1)
         }
       }
