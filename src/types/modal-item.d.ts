@@ -5,7 +5,7 @@ export interface IModalField<T> {
   /** 字段属性名 */
   prop: keyof T
   /** 表单控件类型 */
-  type: 'input' | 'password' | 'switch' | 'select'
+  type: 'input' | 'password' | 'switch' | 'select' | 'custom' | 'tree'
   /** 占位文本 */
   placeholder?: string
   /** 仅新建时显示 */
@@ -20,6 +20,8 @@ export interface IModalField<T> {
   optionLabel?: string
   /** type=select 时，选项 value 对应的字段 */
   optionValue?: string
+  /** type=custom 时，自定义组件的 slot 名称 */
+  slotName?: string
 }
 
 /** 弹窗表单配置 */

@@ -9,6 +9,7 @@
         :load="loadPageData"
         :contentConfig="contentConfig"
         :modalConfig="modalConfig"
+        :treeData="treeData"
       />
     </div>
   </div>
@@ -22,7 +23,24 @@ import { contentConfig } from './config/content.config.ts'
 import { modalConfig } from './config/modal.config.ts'
 
 import { useSystemRootPageHook } from '@/hooks/useSystemRootPageHook.ts'
+import { onMounted, ref } from 'vue'
+import type { MenuItem } from '@/types/login.js'
 const { search, loadPageData, searchRef, contentRef } = useSystemRootPageHook()
+
+// 菜单树数据
+const treeData = ref<MenuItem[]>([])
+
+onMounted(() => {
+  loadPageData(
+    'menu',
+    () => {},
+    (res) => {
+      treeData.value = res.list as MenuItem[]
+    },
+    true,
+    true,
+  )
+})
 </script>
 
 <style lang="less" scoped>

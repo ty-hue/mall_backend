@@ -28,4 +28,11 @@ export interface IContentConfig<T> {
   columns: IContentColumn<T>[]
   /** 删除确认文字模板，{title} 会被title替换 */
   deleteConfirmText?: string
+  // 树形数据表格渲染配置
+  childrenTree?: {
+    rowKey: string
+    treeProps: {
+      children: string
+    }
+  }
 }

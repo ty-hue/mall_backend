@@ -45,6 +45,22 @@
               />
             </el-select>
           </template>
+          <template v-else-if="field.type === 'tree'">
+            <el-tree
+              ref="treeRef"
+              style="max-width: 600px"
+              :data="treeData as TreeNodeData[]"
+              show-checkbox
+              :default-expand-all="false"
+              node-key="id"
+              highlight-current
+              @check="(checks, checkStatus) => handleCheck(field.prop, checkStatus)"
+              :props="{
+                children: 'children',
+                label: 'name',
+              }"
+            />
+          </template>
         </el-form-item>
       </template>
     </el-form>
@@ -57,14 +73,17 @@
   </el-dialog>
 </template>
 
-<script setup lang="ts" generic="T">
+<script setup lang="ts" generic="T, V">
 import { addApi, updateApi } from '@/service/apis/main'
-import { ref } from 'vue'
+import { nextTick, ref } from 'vue'
 import type { IModalConfig } from '@/types/modal-item'
-
+import type { TreeNodeData } from 'element-plus'
+import type { CheckedInfo } from 'element-plus'
+import { ElTree } from 'element-plus'
 const props = defineProps<{
   modalConfig: IModalConfig<T>
   dataLists?: Record<string, Record<string, unknown>[]>
+  treeData?: V[]
 }>()
 
 const emit = defineEmits<{ refresh: [] }>()
@@ -72,11 +91,18 @@ const emit = defineEmits<{ refresh: [] }>()
 const dialogVisible = ref(false)
 const isAddRef = ref(true)
 const form = ref<Partial<T>>({})
+const treeRef = ref<InstanceType<typeof ElTree>[]>([])
 
 const handleOpenDialog = (data: T, isAdd = true) => {
   dialogVisible.value = true
   form.value = { ...data }
   isAddRef.value = isAdd
+}
+
+const handleSetCheckedKeys = async (permissions: number[]) => {
+  await nextTick()
+  const tree = treeRef.value[0]
+  if (tree) tree.setCheckedKeys(permissions)
 }
 
 const handleSubmit = async () => {
@@ -90,6 +116,11 @@ const handleSubmit = async () => {
   emit('refresh')
   dialogVisible.value = false
 }
+const handleCheck = (key: keyof T, checkStatus: CheckedInfo) => {
+  const { checkedKeys, halfCheckedKeys } = checkStatus
+  const allCheckedList = [...checkedKeys, ...halfCheckedKeys]
+  form.value[key] = allCheckedList
+}
 
-defineExpose({ handleOpenDialog })
+defineExpose({ handleOpenDialog, handleSetCheckedKeys })
 </script>

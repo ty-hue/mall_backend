@@ -9,7 +9,12 @@
       </div>
     </div>
     <div class="page-content-table">
-      <el-table :data="tableData as Record<string, unknown>[]" border style="width: 100%">
+      <el-table
+        :data="tableData as Record<string, unknown>[]"
+        border
+        style="width: 100%"
+        v-bind="contentConfig.childrenTree || {}"
+      >
         <template v-for="col in contentConfig.columns" :key="String(col.prop)">
           <el-table-column
             v-if="col.type === 'tag'"
@@ -84,18 +89,18 @@
       :modalConfig="modalConfig"
       :dataLists="dataLists"
       @refresh="loadData()"
+      :treeData="treeData"
     />
   </div>
 </template>
 
-<script setup lang="ts" generic="T, U">
+<script setup lang="ts" generic="T, U, V">
 import { formatDate } from '@/utils/format'
 import { onMounted, reactive, ref } from 'vue'
 import PageModal from '@/components/page-modal.vue'
 import { deleteApi } from '@/service/apis/main.ts'
 import type { IContentConfig } from '@/types/content-item'
 import type { IModalConfig } from '@/types/modal-item'
-
 const props = defineProps<{
   load: (
     url: string,
@@ -107,6 +112,7 @@ const props = defineProps<{
   contentConfig: IContentConfig<T>
   modalConfig: IModalConfig<U>
   dataLists?: Record<string, Record<string, unknown>[]>
+  treeData?: V[]
 }>()
 
 const pagination = reactive({ currentPage: 1, pageSize: 10 })
@@ -116,15 +122,20 @@ const tableData = ref<T[]>([])
 /** 泛型组件无法用 InstanceType，手动声明暴露接口 */
 interface PageModalExposed {
   handleOpenDialog: (data: Record<string, unknown>, isAdd?: boolean) => void
+  handleSetCheckedKeys: (permissions: number[]) => void
 }
 
 const pageModalRef = ref<PageModalExposed | null>(null)
 
 const handleEdit = (row: T) => {
   pageModalRef.value?.handleOpenDialog(row as unknown as Record<string, unknown>, false)
+  pageModalRef.value?.handleSetCheckedKeys(
+    (row as unknown as Record<string, unknown>)['permissions'] as number[],
+  )
 }
 const handleAdd = () => {
   pageModalRef.value?.handleOpenDialog({} as Record<string, unknown>)
+  pageModalRef.value?.handleSetCheckedKeys([])
 }
 
 const handleDelete = async (row: T) => {

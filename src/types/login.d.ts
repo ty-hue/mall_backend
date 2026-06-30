@@ -51,6 +51,7 @@ export interface BaseMenuItem {
   icon: string | null
   permissionId: number | null
   parentId: number | null
+  permission: string | null
 }
 
 export interface MenuItem extends BaseMenuItem {

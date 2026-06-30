@@ -56,4 +56,19 @@ export default [
       return resSuccess(menuTree)
     },
   },
+  // 分页获取菜单列表
+  {
+    method: 'post',
+    url: '/api/menu/list',
+    response: ({ body }) => {
+      const { currentPage = 1, pageSize = 10 } = body
+      const menuTree = buildMenuTree(menu)
+      const start = (currentPage - 1) * pageSize
+      const end = start + pageSize
+      return resSuccess({
+        total: menuTree.length,
+        list: menuTree.slice(start, end),
+      })
+    },
+  },
 ]
