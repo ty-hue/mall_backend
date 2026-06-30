@@ -1,7 +1,9 @@
 import { getPageList } from '@/service/apis/main'
 import { ref } from 'vue'
+import useIsHasPermissionHook from './useIsHasPermissionHook'
 
-export const useSystemRootPageHook = () => {
+export const useSystemRootPageHook = (apiUrl: string) => {
+  const isHasPermission = useIsHasPermissionHook(apiUrl, ['query', 'update', 'delete', 'create'])
   /** 泛型组件无法用 InstanceType，手动声明暴露接口 */
   interface SearchExposed {
     formData: Record<string, unknown>
@@ -21,6 +23,9 @@ export const useSystemRootPageHook = () => {
     isInit?: boolean,
     isAll?: boolean,
   ) => {
+    if (!isHasPermission.query) {
+      return
+    }
     preCallback?.()
     const res = await getPageList<T>(url, {
       ...(isAll ? {} : contentRef.value?.pagination),
@@ -35,5 +40,6 @@ export const useSystemRootPageHook = () => {
     loadPageData,
     searchRef,
     contentRef,
+    isHasPermission,
   }
 }

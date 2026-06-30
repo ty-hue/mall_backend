@@ -18,7 +18,7 @@ import { modalConfig } from './config/modal.config.ts'
 
 import { useSystemRootPageHook } from '@/hooks/useSystemRootPageHook.ts'
 
-const { loadPageData, contentRef } = useSystemRootPageHook()
+const { loadPageData, contentRef } = useSystemRootPageHook(contentConfig.apiUrl)
 </script>
 
 <style lang="less" scoped>

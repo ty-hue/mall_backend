@@ -2,7 +2,7 @@
   <div class="page-content">
     <div class="page-content-header">
       <div class="page-content-header-title">{{ contentConfig.title }}</div>
-      <div class="page-content-header-btn">
+      <div class="page-content-header-btn" v-if="isHasPermission.create">
         <el-button type="primary" size="large" @click="handleAdd">{{
           contentConfig.addBtnText
         }}</el-button>
@@ -50,15 +50,23 @@
           </el-table-column>
           <el-table-column v-else-if="col.type === 'handler'" :label="col.label" align="center">
             <template #default="scope">
-              <el-button type="primary" size="small" @click="handleEdit(scope.row)" icon="edit"
+              <el-button
+                v-if="isHasPermission.update"
+                type="primary"
+                size="small"
+                @click="handleEdit(scope.row)"
+                icon="edit"
                 >编辑</el-button
               >
               <el-popconfirm
+                v-if="isHasPermission.delete"
                 :title="contentConfig.deleteConfirmText || '确认删除？'"
                 @confirm="handleDelete(scope.row)"
               >
                 <template #reference
-                  ><el-button type="danger" size="small" icon="delete">删除</el-button></template
+                  ><el-button v-if="isHasPermission.delete" type="danger" size="small" icon="delete"
+                    >删除</el-button
+                  ></template
                 >
               </el-popconfirm>
             </template>
@@ -101,6 +109,7 @@ import PageModal from '@/components/page-modal.vue'
 import { deleteApi } from '@/service/apis/main.ts'
 import type { IContentConfig } from '@/types/content-item'
 import type { IModalConfig } from '@/types/modal-item'
+import useIsHasPermissionHook from '@/hooks/useIsHasPermissionHook'
 const props = defineProps<{
   load: (
     url: string,
@@ -172,6 +181,12 @@ const handleSizeChange = async (val: number) => {
 }
 
 onMounted(() => loadData(true))
+const isHasPermission = useIsHasPermissionHook(props.contentConfig.apiUrl, [
+  'create',
+  'delete',
+  'update',
+  'query',
+])
 defineExpose({ pagination, loadData })
 </script>
 

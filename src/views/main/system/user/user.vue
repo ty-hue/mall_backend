@@ -1,6 +1,6 @@
 ﻿<template>
   <div class="user">
-    <div class="search">
+    <div class="search" v-if="isHasPermission.query">
       <PageSearch ref="searchRef" @search="search" :searchConfig="searchConfig" />
     </div>
     <div class="content">
@@ -27,7 +27,9 @@ import { modalConfig } from './config/modal.config.ts'
 
 import { useSystemRootPageHook } from '@/hooks/useSystemRootPageHook.ts'
 
-const { search, loadPageData, searchRef, contentRef } = useSystemRootPageHook()
+const { search, loadPageData, searchRef, contentRef, isHasPermission } = useSystemRootPageHook(
+  contentConfig.apiUrl,
+)
 
 const roleList = ref<IRole[]>([])
 const departmentList = ref<IDepartment[]>([])

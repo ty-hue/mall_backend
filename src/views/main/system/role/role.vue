@@ -1,6 +1,6 @@
 <template>
   <div class="user">
-    <div class="search">
+    <div class="search" v-if="isHasPermission.query">
       <PageSearch ref="searchRef" @search="search" :searchConfig="searchConfig" />
     </div>
     <div class="content">
@@ -25,7 +25,9 @@ import { modalConfig } from './config/modal.config.ts'
 import { useSystemRootPageHook } from '@/hooks/useSystemRootPageHook.ts'
 import { onMounted, ref } from 'vue'
 import type { MenuItem } from '@/types/login.js'
-const { search, loadPageData, searchRef, contentRef } = useSystemRootPageHook()
+const { search, loadPageData, searchRef, contentRef, isHasPermission } = useSystemRootPageHook(
+  contentConfig.apiUrl,
+)
 
 // 菜单树数据
 const treeData = ref<MenuItem[]>([])
