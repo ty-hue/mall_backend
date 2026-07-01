@@ -32,4 +32,12 @@ export interface IModalConfig<T> {
   apiUrl: string
   /** 表单字段配置 */
   fields: IModalField<T>[]
+  // 树形数据表格渲染配置
+  childrenTree?: {
+    rowKey: string
+    treeProps: {
+      children: string
+      label?: string
+    }
+  }
 }

@@ -7,6 +7,8 @@ export const contentConfig: IContentConfig<MenuItem> = {
   apiUrl: 'menu',
   columns: [
     { prop: 'name', label: '菜单名称', width: 180, align: 'center' },
+    { prop: 'id', label: '菜单ID', width: 120, align: 'center' },
+
     { prop: 'parentId', label: '父菜单ID', align: 'center' },
     { prop: 'url', label: '菜单路径', width: 240, align: 'center' },
     { prop: 'icon', label: '菜单图标', align: 'center' },

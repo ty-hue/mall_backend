@@ -48,7 +48,11 @@
           >
             <template #default="scope"><slot :name="col.slotName" :row="scope.row" /></template>
           </el-table-column>
-          <el-table-column v-else-if="col.type === 'handler'" :label="col.label" align="center">
+          <el-table-column
+            v-else-if="col.type === 'handler' && (isHasPermission.update || isHasPermission.delete)"
+            :label="col.label"
+            align="center"
+          >
             <template #default="scope">
               <el-button
                 v-if="isHasPermission.update"
@@ -72,7 +76,7 @@
             </template>
           </el-table-column>
           <el-table-column
-            v-else
+            v-else-if="col.type !== 'handler'"
             :prop="String(col.prop)"
             :label="col.label"
             :width="col.width"
@@ -151,11 +155,11 @@ const handleDelete = async (row: T) => {
   await deleteApi(props.contentConfig.apiUrl, {
     id: (row as unknown as Record<string, unknown>).id as number,
   })
-  loadData()
+  await loadData()
 }
 
-const loadData = (isInit?: boolean, isSearch = false) => {
-  props.load(
+const loadData = async (isInit?: boolean, isSearch = false) => {
+  await props.load(
     props.contentConfig.apiUrl,
     isSearch
       ? () => {

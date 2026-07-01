@@ -52,13 +52,10 @@
               :data="treeData as TreeNodeData[]"
               show-checkbox
               :default-expand-all="false"
-              node-key="id"
+              :node-key="modalConfig.childrenTree?.rowKey"
               highlight-current
               @check="(checks, checkStatus) => handleCheck(field.prop, checkStatus)"
-              :props="{
-                children: 'children',
-                label: 'name',
-              }"
+              :props="modalConfig.childrenTree?.treeProps"
             />
           </template>
         </el-form-item>

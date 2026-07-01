@@ -11,11 +11,17 @@ export const useMenuStore = defineStore(
     // 请求菜单
     const getMenuList = async (roleId: number) => {
       const res = await getMenuByRoleId(roleId)
+      console.log(roleId, res)
       menuList.value = res
+    }
+    // 清空菜单
+    const clearMenuList = () => {
+      menuList.value = []
     }
     return {
       menuList,
       getMenuList,
+      clearMenuList,
     }
   },
   {

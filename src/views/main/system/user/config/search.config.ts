@@ -35,7 +35,7 @@ export const searchConfig: IFormItem<IUser>[] = [
     prop: 'enabled',
     type: 'select',
     placeholder: '请选择状态',
-    initialValue: 1,
+    initialValue: '',
     options: [
       { label: '启用', value: 1 },
       { label: '禁用', value: 0 },

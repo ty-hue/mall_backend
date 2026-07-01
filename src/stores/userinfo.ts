@@ -40,7 +40,7 @@ export const useUserInfoStore = defineStore(
       await useTokenStore().removeToken()
       userInfo.value = {} as IUserInfo
       // 退出登录后，清空菜单
-      useMenuStore().menuList = []
+      useMenuStore().clearMenuList()
       // 退出登录后，清空权限
       usePermissionsStore().removePermissions()
       // 跳转到登录页

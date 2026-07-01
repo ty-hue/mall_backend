@@ -9,4 +9,11 @@ export const modalConfig: IModalConfig<IRole> = {
     { prop: 'intro', label: '权限介绍', type: 'input', placeholder: '请输入权限介绍' },
     { prop: 'permissions', label: '权限ID列表', type: 'tree', placeholder: '请选择权限' },
   ],
+  childrenTree: {
+    rowKey: 'permissionId',
+    treeProps: {
+      children: 'children',
+      label: 'name',
+    },
+  },
 }
