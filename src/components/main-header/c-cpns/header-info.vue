@@ -22,10 +22,6 @@
               <el-icon size="16"><UserFilled /></el-icon>
               <span>个人信息</span>
             </el-dropdown-item>
-            <el-dropdown-item divided>
-              <el-icon size="16"><Lock /></el-icon>
-              <span>修改密码</span>
-            </el-dropdown-item>
             <el-dropdown-item divided @click="loginoutAction">
               <el-icon size="16"><SwitchButton /></el-icon>
               <span>退出登陆</span>
@@ -67,6 +63,9 @@ const { loginoutAction } = userInfoStore
       color: var(--text-primary);
       font-weight: 500;
       transition: color var(--transition);
+    }
+    :deep(.el-tooltip__trigger) {
+      outline: none;
     }
     :global(.el-dropdown-menu__item) {
       line-height: 36px !important;
