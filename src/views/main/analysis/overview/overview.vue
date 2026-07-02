@@ -143,6 +143,13 @@ const highlights = [
 
   &-card {
     margin-bottom: 20px;
+    background-color: var(--bg-card);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-card);
+    transition:
+      background-color var(--transition),
+      box-shadow var(--transition);
+    border: 1px solid var(--border-color);
   }
 }
 
@@ -161,13 +168,15 @@ const highlights = [
     .stat-num {
       font-size: 28px;
       font-weight: 700;
-      color: #303133;
+      color: var(--text-primary);
+      transition: color var(--transition);
     }
 
     .stat-label {
       font-size: 13px;
-      color: #909399;
+      color: var(--text-secondary);
       margin-top: 2px;
+      transition: color var(--transition);
     }
   }
 }
@@ -175,17 +184,19 @@ const highlights = [
 .card-title {
   font-size: 16px;
   font-weight: 600;
-  color: #303133;
+  color: var(--text-primary);
   margin: 0;
   padding-left: 8px;
   border-left: 3px solid #409eff;
+  transition: color var(--transition);
 }
 
 .card-text {
   font-size: 14px;
   line-height: 1.9;
-  color: #606266;
+  color: var(--text-regular);
   margin: 0;
+  transition: color var(--transition);
 
   strong {
     color: #409eff;
@@ -209,21 +220,22 @@ const highlights = [
     align-items: center;
     justify-content: center;
     margin: 0 auto 10px;
-    color: #606266;
   }
 
   .tech-name {
     display: block;
     font-size: 14px;
     font-weight: 600;
-    color: #303133;
+    color: var(--text-primary);
     margin-bottom: 4px;
+    transition: color var(--transition);
   }
 
   .tech-desc {
     display: block;
     font-size: 12px;
-    color: #909399;
+    color: var(--text-secondary);
+    transition: color var(--transition);
   }
 }
 
@@ -238,9 +250,12 @@ const highlights = [
     gap: 10px;
     padding: 10px 0;
     font-size: 14px;
-    color: #606266;
+    color: var(--text-regular);
     line-height: 1.6;
-    border-bottom: 1px solid #f0f0f0;
+    border-bottom: 1px solid var(--border-light);
+    transition:
+      color var(--transition),
+      border-color var(--transition);
 
     &:last-child {
       border-bottom: none;

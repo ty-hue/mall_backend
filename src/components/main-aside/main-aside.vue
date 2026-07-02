@@ -9,9 +9,9 @@
         router
         :default-active="defaultActive"
         class="el-menu-vertical-demo"
-        active-text-color="#fff"
-        text-color="#b7bdc3"
-        background-color="#001529"
+        :background-color="'transparent'"
+        :text-color="'var(--text-aside)'"
+        :active-text-color="'var(--text-aside-active)'"
         :collapse="isExpanded"
       >
         <el-sub-menu :index="item.url!" v-for="item in menuList" :key="item.id">
@@ -40,10 +40,8 @@ const menuStore = useMenuStore()
 const { menuList } = storeToRefs(menuStore)
 const layoutStore = useLayoutStore()
 const { isExpanded } = storeToRefs(layoutStore)
-// 根据当前页面路径匹配菜单激活项
 const defaultActive = ref('')
 const route = useRoute()
-// 监听路由变化，更新默认选中项
 watch(
   () => route.path,
   (newPath) => {
@@ -58,44 +56,54 @@ watch(
   height: 100%;
   display: flex;
   flex-direction: column;
+  background-color: var(--bg-aside);
+  transition: background-color var(--transition);
+
   .logo {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 100px;
-    font-size: 14px;
-    font-weight: bold;
-    color: #fff;
+    height: 64px;
+    padding: 0 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+
     .logo-img {
-      width: 56px;
-      height: 56px;
-      object-fit: fill;
+      width: 36px;
+      height: 36px;
+      object-fit: contain;
     }
     .title {
       margin-left: 10px;
+      font-size: 16px;
+      font-weight: 700;
+      color: #fff;
+      white-space: nowrap;
+      letter-spacing: 1px;
     }
   }
+
   .menu {
     flex: 1;
+    overflow-y: auto;
+
     .el-menu {
       border-right: none;
-      border-radius: none;
       user-select: none;
+
       .el-sub-menu {
         .el-menu-item {
           padding-left: 50px !important;
-          background-color: #0c2135;
+          background-color: var(--bg-aside-sub);
+          transition: background-color var(--transition), color var(--transition);
         }
         .el-menu-item:hover {
-          color: #fff !important;
+          background-color: rgba(255, 255, 255, 0.06) !important;
         }
         .el-menu-item.is-active {
-          background-color: #0a60bd;
+          background-color: var(--bg-aside-active) !important;
         }
       }
     }
   }
 }
 </style>
-
-<style></style>

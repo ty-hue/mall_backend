@@ -6,8 +6,12 @@
         :key="item.id"
         :title="item.name"
         :to="{ path: item.url || '/' }"
-        >{{ item.name }}</el-breadcrumb-item
       >
+        <template v-if="item.icon">
+          <el-icon style="margin-right: 4px"><component :is="item.icon.split('-icon-')[1]" /></el-icon>
+        </template>
+        {{ item.name }}
+      </el-breadcrumb-item>
     </el-breadcrumb>
   </div>
 </template>
@@ -32,5 +36,3 @@ watch(
   { immediate: true },
 )
 </script>
-
-<style lang="less" scoped></style>

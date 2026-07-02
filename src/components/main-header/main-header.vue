@@ -1,8 +1,8 @@
 <template>
   <div class="main-header">
     <div class="expanded" @click="toggleExpanded">
-      <el-icon size="30">
-        <component :is="isExpanded ? 'expand' : 'fold'" />
+      <el-icon size="22" color="var(--text-secondary)">
+        <component :is="isExpanded ? 'Expand' : 'Fold'" />
       </el-icon>
     </div>
     <div class="content">
@@ -29,11 +29,22 @@ const { toggleExpanded } = layoutStore
   height: 100%;
   display: flex;
   align-items: center;
+
   .expanded {
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    padding: 4px;
+    border-radius: 4px;
+    transition: background-color var(--transition);
+
+    &:hover {
+      background-color: var(--border-light);
+    }
   }
+
   .content {
-    margin-left: 20px;
+    margin-left: 16px;
     flex: 1;
     display: flex;
     align-items: center;

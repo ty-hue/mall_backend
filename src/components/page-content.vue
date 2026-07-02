@@ -196,21 +196,38 @@ defineExpose({ pagination, loadData })
 
 <style lang="less" scoped>
 .page-content {
+  flex: 1;
+  background-color: var(--bg-card);
+  padding: 20px;
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  transition:
+    background-color var(--transition),
+    box-shadow var(--transition);
+
   .page-content-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 1.5rem;
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border-light);
+    transition: border-color var(--transition);
   }
   .page-content-header-title {
-    font-size: 1.375rem;
-    font-weight: bold;
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--text-primary);
+    transition: color var(--transition);
   }
   .pagination {
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    margin-top: 24px;
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border-light);
+    transition: border-color var(--transition);
   }
 }
 </style>

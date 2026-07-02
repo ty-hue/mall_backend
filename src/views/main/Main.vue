@@ -27,30 +27,49 @@ const { asideWidth } = storeToRefs(layoutStore)
 
 <style lang="less" scoped>
 .main {
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+
   .main-content {
     width: 100%;
     height: 100%;
+
     .el-aside {
+      height: 100vh;
       overflow-x: hidden;
       overflow-y: auto;
-      line-height: 200px;
-      text-align: left;
       cursor: pointer;
-      background-color: #001529;
-      transition: width 0.3s ease-in-out;
+      background-color: var(--bg-aside);
+      transition:
+        width 0.3s ease-in-out,
+        background-color var(--transition);
       scrollbar-width: none;
       &::-webkit-scrollbar {
         display: none;
       }
       -ms-overflow-style: none;
     }
-    .el-main {
-      background-color: #f0f2f5;
-    }
-    .el-header {
-      background-color: #fff;
+
+    > .el-container {
+      height: 100vh;
+      overflow: hidden;
+
+      .el-header {
+        flex-shrink: 0;
+        background-color: var(--bg-card);
+        border-bottom: 1px solid var(--border-color);
+        transition:
+          background-color var(--transition),
+          border-color var(--transition);
+      }
+
+      .el-main {
+        flex: 1;
+        overflow-y: auto;
+        background-color: var(--bg-page);
+        transition: background-color var(--transition);
+      }
     }
   }
 }

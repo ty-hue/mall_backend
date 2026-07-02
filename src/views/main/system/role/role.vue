@@ -1,5 +1,5 @@
 <template>
-  <div class="user">
+  <div class="role">
     <div class="search" v-if="isHasPermission.query">
       <PageSearch ref="searchRef" @search="search" :searchConfig="searchConfig" />
     </div>
@@ -29,7 +29,6 @@ const { search, loadPageData, searchRef, contentRef, isHasPermission } = useSyst
   contentConfig.apiUrl,
 )
 
-// 菜单树数据
 const treeData = ref<MenuItem[]>([])
 
 onMounted(() => {
@@ -46,17 +45,9 @@ onMounted(() => {
 </script>
 
 <style lang="less" scoped>
-.user {
-  border-radius: 20px;
-  overflow: hidden;
-  .search {
-    background-color: #fff;
-    padding: 20px;
-    margin-bottom: 20px;
-  }
-  .content {
-    background-color: #fff;
-    padding: 20px;
-  }
+.role {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 </style>

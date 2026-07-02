@@ -6,7 +6,7 @@
         <el-tab-pane name="account">
           <template #label>
             <span class="custom-tabs-label">
-              <el-icon><user /></el-icon>
+              <el-icon><User /></el-icon>
               <span>帐号登录</span>
             </span>
           </template>
@@ -15,7 +15,7 @@
         <el-tab-pane name="phone">
           <template #label>
             <span class="custom-tabs-label">
-              <el-icon><iphone /></el-icon>
+              <el-icon><Iphone /></el-icon>
               <span>手机号登录</span>
             </span>
           </template>
@@ -27,7 +27,7 @@
       <el-checkbox v-model="isRememberPassword" label="记住密码" size="large" />
       <el-link href="https://element-plus.org" target="_blank">忘记密码</el-link>
     </div>
-    <el-button class="login-btn" type="primary" @click="handleLogin">立即登录</el-button>
+    <el-button class="login-btn" type="primary" size="large" @click="handleLogin">立即登录</el-button>
   </div>
 </template>
 <script setup lang="ts">
@@ -59,37 +59,49 @@ const handleLogin = async () => {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 330px;
-  background-color: #fff;
-  padding: 24px;
-  border-radius: 4px;
+  width: 380px;
+  background-color: var(--bg-card);
+  padding: 32px 28px 28px;
+  border-radius: 12px;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.12);
+  position: relative;
+  z-index: 1;
+  transition: background-color var(--transition);
+
   .title {
-    font-size: 24px;
-    font-weight: bold;
+    font-size: 22px;
+    font-weight: 700;
     text-align: center;
     margin-bottom: 24px;
+    color: var(--text-primary);
+    transition: color var(--transition);
   }
+
   .tabs {
     width: 100%;
-    margin-bottom: 12px;
+    margin-bottom: 16px;
+
     .custom-tabs-label {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
+      font-size: 14px;
     }
   }
+
   .remember-and-forget {
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 12px;
+    margin-bottom: 16px;
   }
+
   .login-btn {
     width: 100%;
-    height: 40px;
-    display: flex;
-    justify-content: center;
+    height: 42px;
+    font-size: 15px;
+    letter-spacing: 2px;
   }
 }
 </style>

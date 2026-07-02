@@ -1,4 +1,4 @@
-﻿<template>
+<template>
   <div class="department">
     <div class="search" v-if="isHasPermission.query">
       <PageSearch ref="searchRef" @search="search" :searchConfig="searchConfig" />
@@ -30,16 +30,8 @@ const { search, loadPageData, searchRef, contentRef, isHasPermission } = useSyst
 
 <style lang="less" scoped>
 .department {
-  border-radius: 20px;
-  overflow: hidden;
-  .search {
-    background-color: #fff;
-    padding: 20px;
-    margin-bottom: 20px;
-  }
-  .content {
-    background-color: #fff;
-    padding: 20px;
-  }
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 </style>

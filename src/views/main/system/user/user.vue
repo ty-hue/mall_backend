@@ -1,4 +1,4 @@
-﻿<template>
+<template>
   <div class="user">
     <div class="search" v-if="isHasPermission.query">
       <PageSearch ref="searchRef" @search="search" :searchConfig="searchConfig" />
@@ -60,16 +60,8 @@ onMounted(() => loadSelectOptions())
 
 <style lang="less" scoped>
 .user {
-  border-radius: 20px;
-  overflow: hidden;
-  .search {
-    background-color: #fff;
-    padding: 20px;
-    margin-bottom: 20px;
-  }
-  .content {
-    background-color: #fff;
-    padding: 20px;
-  }
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 </style>

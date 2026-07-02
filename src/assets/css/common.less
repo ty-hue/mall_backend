@@ -1,0 +1,69 @@
+/* ========== 浅色主题变量 ========== */
+:root {
+  --bg-page: #f0f2f5;
+  --bg-card: #ffffff;
+  --bg-aside: #001529;
+  --bg-aside-sub: #0c2135;
+  --bg-aside-active: #0a60bd;
+
+  --text-primary: #303133;
+  --text-regular: #606266;
+  --text-secondary: #909399;
+  --text-placeholder: #c0c4cc;
+  --text-aside: #b7bdc3;
+  --text-aside-active: #ffffff;
+
+  --border-color: #ebeef5;
+  --border-light: #f0f0f0;
+
+  --shadow-card: 0 2px 12px rgba(0, 0, 0, 0.06);
+  --shadow-hover: 0 4px 16px rgba(0, 0, 0, 0.1);
+
+  --radius-card: 8px;
+  --radius-small: 4px;
+
+  --transition: 0.25s ease;
+}
+
+/* ========== 深色主题变量 ========== */
+html.dark {
+  --bg-page: #141414;
+  --bg-card: #1d1e1f;
+  --bg-aside: #141414;
+  --bg-aside-sub: #1d1e1f;
+  --bg-aside-active: #409eff;
+
+  --text-primary: #e5eaf3;
+  --text-regular: #cfd3dc;
+  --text-secondary: #a3a6ad;
+  --text-placeholder: #636466;
+  --text-aside: #a3a6ad;
+  --text-aside-active: #ffffff;
+
+  --border-color: #363637;
+  --border-light: #2c2c2d;
+
+  --shadow-card: 0 2px 12px rgba(0, 0, 0, 0.3);
+  --shadow-hover: 0 4px 16px rgba(0, 0, 0, 0.45);
+}
+
+/* ========== 全局样式重置 ========== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body,
+#app {
+  width: 100%;
+  height: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: var(--text-primary);
+  background-color: var(--bg-page);
+  transition: background-color var(--transition), color var(--transition);
+}

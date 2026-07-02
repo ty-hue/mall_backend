@@ -23,11 +23,8 @@ const { loadPageData, contentRef } = useSystemRootPageHook(contentConfig.apiUrl)
 
 <style lang="less" scoped>
 .menu {
-  border-radius: 20px;
-  overflow: hidden;
-  .content {
-    background-color: #fff;
-    padding: 20px;
-  }
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 </style>

@@ -4,23 +4,11 @@
       <el-switch
         v-model="themeMode"
         size="large"
-        style="--el-switch-on-color: #2c2c2c; --el-switch-off-color: #f2f2f2"
-      >
-        <template #active-action>
-          <span class="custom-active-action">
-            <el-icon size="20" color="#fff">
-              <moon />
-            </el-icon>
-          </span>
-        </template>
-        <template #inactive-action>
-          <span class="custom-inactive-action">
-            <el-icon size="20" color="#606266">
-              <Sunny />
-            </el-icon>
-          </span>
-        </template>
-      </el-switch>
+        inline-prompt
+        :active-icon="Moon"
+        :inactive-icon="Sunny"
+        style="--el-switch-on-color: #2c2c2c; --el-switch-off-color: #e5e5e5"
+      />
     </div>
     <div class="info">
       <el-dropdown>
@@ -31,22 +19,15 @@
         <template #dropdown>
           <el-dropdown-menu>
             <el-dropdown-item>
-              <el-icon size="16" color="#606266">
-                <UserFilled />
-              </el-icon>
+              <el-icon size="16"><UserFilled /></el-icon>
               <span>个人信息</span>
             </el-dropdown-item>
             <el-dropdown-item divided>
-              <el-icon size="16" color="#606266">
-                <Lock />
-              </el-icon>
+              <el-icon size="16"><Lock /></el-icon>
               <span>修改密码</span>
             </el-dropdown-item>
-
             <el-dropdown-item divided @click="loginoutAction">
-              <el-icon size="16" color="#606266">
-                <SwitchButton />
-              </el-icon>
+              <el-icon size="16"><SwitchButton /></el-icon>
               <span>退出登陆</span>
             </el-dropdown-item>
           </el-dropdown-menu>
@@ -61,6 +42,8 @@ import { DEFAULT_AVATAR_URL } from '@/global/constant'
 import { useThemeStore } from '@/stores/theme'
 import { storeToRefs } from 'pinia'
 import { useUserInfoStore } from '@/stores/userinfo'
+import { Moon, Sunny } from '@element-plus/icons-vue'
+
 const themeStore = useThemeStore()
 const { themeMode } = storeToRefs(themeStore)
 const userInfoStore = useUserInfoStore()
@@ -72,28 +55,18 @@ const { loginoutAction } = userInfoStore
 .header-info {
   height: 100%;
   display: flex;
-  gap: 20px;
+  gap: 24px;
   align-items: center;
-  .el-switch {
-    .custom-active-action {
-      border-radius: 50%;
-      height: 20px;
-      background-color: rgb(20, 20, 20);
-    }
-    .custom-inactive-action {
-      border-radius: 50%;
-      height: 20px;
-      background-color: #fff;
-    }
-  }
+
   .info {
     cursor: pointer;
     .avatar-with-name {
       display: flex;
       align-items: center;
       gap: 10px;
-      color: #333;
+      color: var(--text-primary);
       font-weight: 500;
+      transition: color var(--transition);
     }
     :global(.el-dropdown-menu__item) {
       line-height: 36px !important;

@@ -7,6 +7,7 @@ import App from './App.vue'
 import store from './stores'
 import router from './router'
 import registerIcons from './global/register-icons.ts'
+import 'element-plus/theme-chalk/dark/css-vars.css'
 import 'element-plus/theme-chalk/el-message.css'
 const app = createApp(App)
 app.use(store)
