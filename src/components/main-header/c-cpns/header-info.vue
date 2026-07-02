@@ -21,7 +21,7 @@
         </div>
         <template #dropdown>
           <el-dropdown-menu>
-            <el-dropdown-item>
+            <el-dropdown-item @click="goUserDetail">
               <el-icon size="16"><UserFilled /></el-icon>
               <span>个人信息</span>
             </el-dropdown-item>
@@ -43,6 +43,7 @@ import { useThemeStore } from '@/stores/theme'
 import { storeToRefs } from 'pinia'
 import { useUserInfoStore } from '@/stores/userinfo'
 import { Moon, Sunny, FullScreen } from '@element-plus/icons-vue'
+import router from '@/router'
 
 const themeStore = useThemeStore()
 const { themeMode } = storeToRefs(themeStore)
@@ -62,6 +63,10 @@ const toggleFullscreen = () => {
 
 const onFullscreenChange = () => {
   isFullscreen.value = !!document.fullscreenElement
+}
+
+const goUserDetail = () => {
+  router.push({ name: 'UserDetail' })
 }
 
 onMounted(() => {

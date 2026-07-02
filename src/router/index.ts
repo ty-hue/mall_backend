@@ -18,6 +18,13 @@ const router = createRouter({
       path: '/main',
       name: 'Main',
       component: () => import('@/views/main/Main.vue'),
+      children: [
+        {
+          path: '/main/user-detail',
+          name: 'UserDetail',
+          component: () => import('@/views/main/user-detail/userDetail.vue'),
+        },
+      ],
     },
     // 404 页面
     {
