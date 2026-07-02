@@ -1,7 +1,7 @@
 <template>
   <div class="header-info">
     <div class="operation">
-      <el-icon class="fullscreen-btn" @click="toggleFullscreen">
+      <el-icon class="fullscreen-btn" @click="toggleFullscreen" size="24">
         <component :is="FullScreen" />
       </el-icon>
       <el-switch
