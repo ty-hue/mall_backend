@@ -8,7 +8,9 @@
         :to="{ path: item.url || '/' }"
       >
         <template v-if="item.icon">
-          <el-icon style="margin-right: 4px"><component :is="item.icon.split('-icon-')[1]" /></el-icon>
+          <el-icon style="margin-right: 4px"
+            ><component :is="item.icon.split('-icon-')[1]"
+          /></el-icon>
         </template>
         {{ item.name }}
       </el-breadcrumb-item>
@@ -36,3 +38,20 @@ watch(
   { immediate: true },
 )
 </script>
+
+<style lang="less" scoped>
+.breadcrumb {
+  display: flex;
+  align-items: center;
+
+  :deep(.el-breadcrumb__item) {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  :deep(.el-breadcrumb__inner) {
+    display: inline-flex;
+    align-items: center;
+  }
+}
+</style>

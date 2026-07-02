@@ -57,7 +57,10 @@ watch(
   display: flex;
   flex-direction: column;
   background-color: var(--bg-aside);
-  transition: background-color var(--transition);
+  border-right: 1px solid var(--border-light);
+  transition:
+    background-color var(--transition),
+    border-color var(--transition);
 
   .logo {
     display: flex;
@@ -65,7 +68,7 @@ watch(
     justify-content: center;
     height: 64px;
     padding: 0 16px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    border-bottom: 1px solid var(--border-light);
 
     .logo-img {
       width: 36px;
@@ -76,7 +79,7 @@ watch(
       margin-left: 10px;
       font-size: 16px;
       font-weight: 700;
-      color: #fff;
+      color: var(--text-primary);
       white-space: nowrap;
       letter-spacing: 1px;
     }
@@ -94,10 +97,12 @@ watch(
         .el-menu-item {
           padding-left: 50px !important;
           background-color: var(--bg-aside-sub);
-          transition: background-color var(--transition), color var(--transition);
+          transition:
+            background-color var(--transition),
+            color var(--transition);
         }
         .el-menu-item:hover {
-          background-color: rgba(255, 255, 255, 0.06) !important;
+          background-color: var(--bg-aside-sub) !important;
         }
         .el-menu-item.is-active {
           background-color: var(--bg-aside-active) !important;
