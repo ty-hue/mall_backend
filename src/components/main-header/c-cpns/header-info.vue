@@ -1,6 +1,9 @@
 <template>
   <div class="header-info">
     <div class="operation">
+      <el-icon class="fullscreen-btn" @click="toggleFullscreen">
+        <component :is="FullScreen" />
+      </el-icon>
       <el-switch
         v-model="themeMode"
         size="large"
@@ -34,17 +37,40 @@
 </template>
 
 <script setup lang="ts">
+import { ref, onMounted, onUnmounted } from 'vue'
 import { DEFAULT_AVATAR_URL } from '@/global/constant'
 import { useThemeStore } from '@/stores/theme'
 import { storeToRefs } from 'pinia'
 import { useUserInfoStore } from '@/stores/userinfo'
-import { Moon, Sunny } from '@element-plus/icons-vue'
+import { Moon, Sunny, FullScreen } from '@element-plus/icons-vue'
 
 const themeStore = useThemeStore()
 const { themeMode } = storeToRefs(themeStore)
 const userInfoStore = useUserInfoStore()
 const { userInfo } = storeToRefs(userInfoStore)
 const { loginoutAction } = userInfoStore
+
+const isFullscreen = ref(false)
+
+const toggleFullscreen = () => {
+  if (!document.fullscreenElement) {
+    document.documentElement.requestFullscreen()
+  } else {
+    document.exitFullscreen()
+  }
+}
+
+const onFullscreenChange = () => {
+  isFullscreen.value = !!document.fullscreenElement
+}
+
+onMounted(() => {
+  document.addEventListener('fullscreenchange', onFullscreenChange)
+})
+
+onUnmounted(() => {
+  document.removeEventListener('fullscreenchange', onFullscreenChange)
+})
 </script>
 
 <style lang="less" scoped>
@@ -53,6 +79,28 @@ const { loginoutAction } = userInfoStore
   display: flex;
   gap: 24px;
   align-items: center;
+
+  .operation {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    .fullscreen-btn {
+      font-size: 18px;
+      color: var(--text-secondary);
+      cursor: pointer;
+      padding: 4px;
+      border-radius: 4px;
+      transition:
+        color var(--transition),
+        background-color var(--transition);
+
+      &:hover {
+        color: var(--text-primary);
+        background-color: var(--border-light);
+      }
+    }
+  }
 
   .info {
     cursor: pointer;
