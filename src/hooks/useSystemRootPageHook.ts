@@ -2,8 +2,17 @@ import { getPageList } from '@/service/apis/main'
 import { ref } from 'vue'
 import useIsHasPermissionHook from './useIsHasPermissionHook'
 
-export const useSystemRootPageHook = (apiUrl: string) => {
-  const isHasPermission = useIsHasPermissionHook(apiUrl, ['query', 'update', 'delete', 'create'])
+export const useSystemRootPageHook = (
+  apiUrl: string,
+  permissionPrefix = 'system',
+  permissionPageName?: string,
+) => {
+  const permissionName = permissionPageName || apiUrl
+  const isHasPermission = useIsHasPermissionHook(
+    permissionName,
+    ['query', 'update', 'delete', 'create'],
+    permissionPrefix,
+  )
   /** 泛型组件无法用 InstanceType，手动声明暴露接口 */
   interface SearchExposed {
     formData: Record<string, unknown>

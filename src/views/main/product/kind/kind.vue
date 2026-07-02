@@ -1,47 +1,55 @@
 <template>
   <div class="product-kind">
-    <div class="kind-card">
-      <el-icon :size="48" color="#67c23a"><Grid /></el-icon>
-      <h2>商品分类</h2>
-      <p>功能开发中，敬请期待...</p>
+    <div class="search" v-if="isHasPermission.query">
+      <PageSearch ref="searchRef" @search="search" :searchConfig="searchConfig" />
+    </div>
+    <div class="content">
+      <PageContent
+        ref="contentRef"
+        :load="loadPageData"
+        :contentConfig="contentConfig"
+        :modalConfig="modalConfig"
+        :dataLists="dataLists"
+      />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { Grid } from '@element-plus/icons-vue'
+import PageSearch from '@/components/page-search.vue'
+import PageContent from '@/components/page-content.vue'
+import { onMounted, reactive, ref } from 'vue'
+import type { ICategory } from '@/types/category'
+import { searchConfig } from './config/search.config.ts'
+import { contentConfig } from './config/content.config.ts'
+import { modalConfig } from './config/modal.config.ts'
+
+import { useSystemRootPageHook } from '@/hooks/useSystemRootPageHook.ts'
+
+const { search, loadPageData, searchRef, contentRef, isHasPermission } =
+  useSystemRootPageHook(contentConfig.apiUrl, 'product', 'kind')
+
+const categoryList = ref<ICategory[]>([])
+const dataLists = reactive({ categoryList })
+const loadSelectOptions = async () => {
+  await loadPageData<ICategory>(
+    'category',
+    () => {},
+    (res) => {
+      categoryList.value = res.list
+    },
+    true,
+    true,
+  )
+}
+
+onMounted(() => loadSelectOptions())
 </script>
 
 <style lang="less" scoped>
 .product-kind {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   height: 100%;
-
-  .kind-card {
-    text-align: center;
-    background-color: var(--bg-card);
-    padding: 64px 80px;
-    border-radius: var(--radius-card);
-    box-shadow: var(--shadow-card);
-    transition:
-      background-color var(--transition),
-      box-shadow var(--transition);
-
-    h2 {
-      margin-top: 16px;
-      font-size: 20px;
-      color: var(--text-primary);
-      transition: color var(--transition);
-    }
-
-    p {
-      margin-top: 8px;
-      font-size: 14px;
-      color: var(--text-secondary);
-      transition: color var(--transition);
-    }
-  }
+  display: flex;
+  flex-direction: column;
 }
 </style>

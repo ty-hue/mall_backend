@@ -185,12 +185,11 @@ const handleSizeChange = async (val: number) => {
 }
 
 onMounted(() => loadData(true))
-const isHasPermission = useIsHasPermissionHook(props.contentConfig.apiUrl, [
-  'create',
-  'delete',
-  'update',
-  'query',
-])
+const isHasPermission = useIsHasPermissionHook(
+  props.contentConfig.permissionPageName || props.contentConfig.apiUrl,
+  ['create', 'delete', 'update', 'query'],
+  props.contentConfig.permissionPrefix,
+)
 defineExpose({ pagination, loadData })
 </script>
 

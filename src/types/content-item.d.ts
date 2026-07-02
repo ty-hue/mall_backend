@@ -24,6 +24,10 @@ export interface IContentConfig<T> {
   addBtnText: string
   /** API 路径，如 'user' | 'department' */
   apiUrl: string
+  /** 权限前缀，默认 'system' */
+  permissionPrefix?: string
+  /** 权限页面名，默认取 apiUrl */
+  permissionPageName?: string
   /** 表格列配置 */
   columns: IContentColumn<T>[]
   /** 删除确认文字模板，{title} 会被title替换 */
