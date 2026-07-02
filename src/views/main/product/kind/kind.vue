@@ -26,8 +26,11 @@ import { modalConfig } from './config/modal.config.ts'
 
 import { useSystemRootPageHook } from '@/hooks/useSystemRootPageHook.ts'
 
-const { search, loadPageData, searchRef, contentRef, isHasPermission } =
-  useSystemRootPageHook(contentConfig.apiUrl, 'product', 'kind')
+const { search, loadPageData, searchRef, contentRef, isHasPermission } = useSystemRootPageHook(
+  contentConfig.apiUrl,
+  'product',
+  'kind',
+)
 
 const categoryList = ref<ICategory[]>([])
 const dataLists = reactive({ categoryList })
